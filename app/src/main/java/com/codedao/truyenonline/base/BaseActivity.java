@@ -12,8 +12,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContenView();
         registerEventView();
     }
+    protected abstract void setContenView();
 
     protected abstract void registerEventView();
 
