@@ -2,25 +2,22 @@ package com.codedao.truyenonline.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.codedao.truyenonline.R;
-import com.codedao.truyenonline.adapter.ViewpagerAdapter;
 import com.codedao.truyenonline.base.BaseActivity;
-import com.codedao.truyenonline.fragment.OfflineFragment;
-import com.codedao.truyenonline.fragment.OnlineFragment;
+import com.codedao.truyenonline.fragment.IndexFragment;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +27,11 @@ public class Screen1 extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.conten,new IndexFragment());
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -39,11 +41,7 @@ public class Screen1 extends BaseActivity
 
     @Override
     protected void registerEventView() {
-        mViewPager = findViewById(R.id.viewpage);
-        setupViewPager(mViewPager);
 
-        mTabLayout = findViewById(R.id.tabs);
-        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -103,10 +101,5 @@ public class Screen1 extends BaseActivity
         return true;
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewpagerAdapter adapter = new ViewpagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OnlineFragment(), "Online");
-        adapter.addFragment(new OfflineFragment(), "Offline");
-        viewPager.setAdapter(adapter);
-    }
+
 }
