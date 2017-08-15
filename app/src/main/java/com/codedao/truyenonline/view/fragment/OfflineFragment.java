@@ -1,4 +1,4 @@
-package com.codedao.truyenonline.fragment;
+package com.codedao.truyenonline.view.fragment;
 
 
 import android.os.Bundle;
