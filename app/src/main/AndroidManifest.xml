@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.MainActivity">
         </activity>
         <activity
-            android:name=".activity.Screen1"
+            android:name=".view.Screen1"
             android:label="@string/title_activity_screen1"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

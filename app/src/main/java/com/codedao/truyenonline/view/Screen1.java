@@ -1,4 +1,4 @@
-package com.codedao.truyenonline.activity;
+package com.codedao.truyenonline.view;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,8 +12,7 @@ import android.view.MenuItem;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
-import com.codedao.truyenonline.fragment.IndexFragment;
-import com.codedao.truyenonline.fragment.Screen3Fragment;
+import com.codedao.truyenonline.view.fragment.IndexFragment;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +30,7 @@ public class Screen1 extends BaseActivity
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten,new Screen3Fragment());
+        fragmentTransaction.replace(R.id.conten,new IndexFragment());
         fragmentTransaction.commit();
     }
 
