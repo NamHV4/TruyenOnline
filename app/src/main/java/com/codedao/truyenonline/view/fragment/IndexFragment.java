@@ -3,6 +3,8 @@ package com.codedao.truyenonline.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IndexFragment extends Fragment {
+public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private HorizontalAdapter horizontalAdapter;
@@ -48,7 +50,7 @@ public class IndexFragment extends Fragment {
         horizontalList.add("ITEM 5");
         horizontalList.add("TRUYỆN CƯỜI");
         horizontalList.add("ITEM 5");
-        horizontalAdapter=new HorizontalAdapter(horizontalList);
+        horizontalAdapter=new HorizontalAdapter(horizontalList, this);
 
 
 
@@ -62,4 +64,12 @@ public class IndexFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(int position) {
+        FragmentManager fragmentManager= getFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.conten,new Screen3Fragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
 }
