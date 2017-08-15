@@ -5,5 +5,4 @@ package com.codedao.truyenonline.view;
  */
 
 public class BaseView {
-    jahsuhdaushdu;
 }
