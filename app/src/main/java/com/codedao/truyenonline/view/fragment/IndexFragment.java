@@ -33,6 +33,10 @@ public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, container, false);
+
+        addSuggestionFragment();
+
+
         mRecyclerView = view.findViewById(R.id.rcView);
         horizontalList=new ArrayList<>();
         horizontalList.add("TRUYỆN NGƯỜI LỚN");
@@ -61,6 +65,14 @@ public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItem
 
         mRecyclerView.setAdapter(horizontalAdapter);
         return view;
+    }
+
+    private void addSuggestionFragment() {
+        FragmentManager fragmentManager= getFragmentManager();
+        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.rcvSuggest,new Screen2Fragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 
