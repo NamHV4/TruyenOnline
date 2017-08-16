@@ -19,6 +19,24 @@ public class Truyen {
     private int mLuotXem;
     private int mAvatar;
     private int mDanhGiau;
+    private String mTrangThai;
+    private int mSoDiem;
+
+    public int getmSoDiem() {
+        return mSoDiem;
+    }
+
+    public void setmSoDiem(int mSoDiem) {
+        this.mSoDiem = mSoDiem;
+    }
+
+    public String getmTrangThai() {
+        return mTrangThai;
+    }
+
+    public void setmTrangThai(String mTrangThai) {
+        this.mTrangThai = mTrangThai;
+    }
 
     public Truyen() {
     }
