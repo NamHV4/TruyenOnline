@@ -41,7 +41,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Su
         holder.tvSoDiem.setText(truyen.getmSoDiem()+"");
         holder.tvTrangThai.setText(truyen.getmTrangThai());
         holder.tvTenTruyen.setText(truyen.getmTenTruyen());
-        holder.imgAvatar.setImageResource(R.drawable.sea);
+        holder.imgAvatar.setImageResource(truyen.getmAvatar());
     }
 
     @Override

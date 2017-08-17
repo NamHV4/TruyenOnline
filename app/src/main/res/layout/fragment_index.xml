@@ -8,14 +8,13 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcView"
         android:layout_width="match_parent"
-        android:layout_height="70dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="70dp"/>
 
-    <FrameLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcIndex"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px"
-        android:id="@+id/rcvSuggest"
-        ></FrameLayout>
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>

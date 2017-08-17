@@ -1,7 +1,5 @@
 package com.codedao.truyenonline.model;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by utnam on 7/28/2017.
  */
@@ -21,6 +19,8 @@ public class Truyen {
     private int mDanhGiau;
     private String mTrangThai;
     private int mSoDiem;
+
+
 
     public int getmSoDiem() {
         return mSoDiem;
