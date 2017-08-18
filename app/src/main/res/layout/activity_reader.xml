@@ -89,6 +89,29 @@
                     android:text="@string/content_exmaple"
                     android:textSize="15sp" />
             </LinearLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50px"-->
+                <!--&gt;-->
+                <!--<ImageButton-->
+                    <!--android:id="@+id/btnVote"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:src="@drawable/icon_vote"-->
+                    <!--/>-->
+                <!--<Button-->
+                    <!--android:layout_toRightOf="@id/btnVote"-->
+                    <!--android:id="@+id/btnComment"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/icon_comment"/>-->
+                <!--<Button-->
+                    <!--android:id="@+id/btnShare"-->
+                    <!--android:layout_toRightOf="@id/btnComment"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/icon_share"/>-->
+            <!--</RelativeLayout>-->
 
         </LinearLayout>
     </ScrollView>

@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/imgAvatar"
-        android:layout_width="300px"
-        android:layout_height="300px" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/sea" />
 
     <TextView
         android:id="@+id/tvName"
@@ -16,16 +17,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imgAvatar"
         android:maxLines="2"
-        android:paddingTop="30px" />
+        android:paddingTop="12dp"
+        android:text="name" />
 
     <ImageView
         android:id="@+id/imgMore"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_toRightOf="@id/tvName"
-        android:layout_alignParentRight="true"
         android:layout_below="@id/imgAvatar"
-        android:layout_marginTop="30px"
+        android:layout_marginLeft="138dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/ic_more_vert_black_24dp" />
 
     <TextView
@@ -35,13 +36,14 @@
         android:layout_below="@id/tvName" />
 
     <ImageView
-        android:layout_width="30px"
-        android:layout_height="30px"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_below="@id/tvName"
         android:layout_toRightOf="@id/tvMark"
         android:src="@drawable/ic_star_rate_black_18dp" />
 
     <TextView
+        android:textSize="15sp"
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
