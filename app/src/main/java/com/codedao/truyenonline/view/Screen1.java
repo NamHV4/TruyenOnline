@@ -76,6 +76,10 @@ public class Screen1 extends BaseActivity
         if (id == R.id.action_settings) {
             startActivity(new Intent(Screen1.this,ReaderActivity.class));
         }
+        if (id == R.id.action_search) {
+            Toast toast=Toast.makeText(getApplicationContext(),"Search",Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
         return super.onOptionsItemSelected(item);
     }
