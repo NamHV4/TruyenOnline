@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 startActivity(new Intent(MainActivity.this,Screen1.class));
+                finish();
             }
         };
         countDownTimer.start();
