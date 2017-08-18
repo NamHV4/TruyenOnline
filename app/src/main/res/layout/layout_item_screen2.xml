@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imgAvatar"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
         android:background="@drawable/sea" />
 
     <TextView
@@ -17,27 +17,28 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imgAvatar"
         android:maxLines="2"
-        android:paddingTop="12dp"
+        android:paddingTop="@dimen/_12sdp"
         android:text="name" />
 
     <ImageView
         android:id="@+id/imgMore"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
         android:layout_below="@id/imgAvatar"
-        android:layout_marginLeft="138dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="@dimen/_138sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:src="@drawable/ic_more_vert_black_24dp" />
 
     <TextView
         android:id="@+id/tvMark"
+        android:text="4,5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvName" />
 
     <ImageView
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
         android:layout_below="@id/tvName"
         android:layout_toRightOf="@id/tvMark"
         android:src="@drawable/ic_star_rate_black_18dp" />
