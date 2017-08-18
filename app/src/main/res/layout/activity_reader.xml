@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    tools:context="com.codedao.truyenonline.view.ReaderActivity">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/container"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300px"
+                android:background="@drawable/sea">
+                <com.nightonke.jellytogglebutton.JellyToggleButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:jtbJelly="itself"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/toggle"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                android:orientation="vertical"
+                android:paddingTop="60px">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lưng chừng cô đơn"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Nguyễn Ngọc Thạch"
+                    android:textSize="25sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="60px"
+                    android:paddingTop="20px">
+
+                    <TextView
+                        android:id="@+id/star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_smile"
+                        android:drawablePadding="3px"
+                        android:text="4.5"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/star"
+                        android:drawableLeft="@drawable/icon_view"
+                        android:drawablePadding="3px"
+                        android:paddingLeft="30px"
+
+                        android:paddingRight="30px"
+                        android:text="4.5"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/comment"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/view"
+                        android:drawableLeft="@drawable/icon_com"
+                        android:drawablePadding="3px"
+                        android:text="4.5"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/content_exmaple"
+                    android:textSize="15sp" />
+            </LinearLayout>
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50px"-->
+            <!--&gt;-->
+            <!--<ImageButton-->
+            <!--android:id="@+id/btnVote"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/icon_vote"-->
+            <!--/>-->
+            <!--<Button-->
+            <!--android:layout_toRightOf="@id/btnVote"-->
+            <!--android:id="@+id/btnComment"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/icon_comment"/>-->
+            <!--<Button-->
+            <!--android:id="@+id/btnShare"-->
+            <!--android:layout_toRightOf="@id/btnComment"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/icon_share"/>-->
+            <!--</RelativeLayout>-->
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
