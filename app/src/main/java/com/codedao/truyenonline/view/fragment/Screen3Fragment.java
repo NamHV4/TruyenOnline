@@ -1,6 +1,8 @@
 package com.codedao.truyenonline.view.fragment;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.adapter.TruyenAdapter;
 import com.codedao.truyenonline.model.Truyen;
+import com.codedao.truyenonline.presenter.Screen3Presenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +26,14 @@ public class Screen3Fragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private TruyenAdapter mTruyenAdapter;
-    private List<Truyen> mTruyens;
-
+    private Screen3Presenter mScreen3Presenter;
 
     public Screen3Fragment() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public Screen3Fragment(Context context) {
+        mScreen3Presenter = new Screen3Presenter(context);
         // Required empty public constructor
     }
 
@@ -37,19 +44,8 @@ public class Screen3Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_screen3, container, false);
         mRecyclerView = view.findViewById(R.id.rv_items_truyen);
-        mTruyens = new ArrayList<>();
-        Truyen truyen;
-        for (int i = 1; i < 10; i++) {
-            truyen = new Truyen();
-            truyen.setmIdTruyen(i);
-            truyen.setmTenTruyen("7 Chiến lược thịnh vượng");
-            truyen.setmTacGia("Jim Rohn");
-            truyen.setmSoLike(4500 + i);
-            mTruyens.add(truyen);
-        }
 
-        mTruyenAdapter = new TruyenAdapter(mTruyens, getContext());
-        mRecyclerView.setAdapter(mTruyenAdapter);
+        mRecyclerView.setAdapter(mScreen3Presenter.getmTruyenAdapter());
 
         //RecyclerView scroll vertical
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
