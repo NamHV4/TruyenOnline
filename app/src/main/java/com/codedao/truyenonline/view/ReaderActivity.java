@@ -1,11 +1,10 @@
 package com.codedao.truyenonline.view;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codedao.truyenonline.R;
@@ -15,15 +14,17 @@ import com.nightonke.jellytogglebutton.State;
 
 public class ReaderActivity extends AppCompatActivity {
     JellyToggleButton jellyToggleButton;
-//    LinearLayout container;
+    RelativeLayout mRelativeLayout;
+    TextView mTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reader);
         getSupportActionBar().hide();
-        jellyToggleButton=findViewById(R.id.toggle);
-
-//        container=findViewById(R.id.container);
+        jellyToggleButton = findViewById(R.id.toggle);
+        mRelativeLayout = findViewById(R.id.relativeLayout);
+        mTextView = findViewById(R.id.txtConten);
 
         jellyToggleButton.setJelly(Jelly.RANDOM);
         jellyToggleButton.setRightText("Night");
@@ -32,21 +33,22 @@ public class ReaderActivity extends AppCompatActivity {
         jellyToggleButton.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
-                Toast lastToast=new Toast(getApplicationContext());
+                Toast lastToast = new Toast(getApplicationContext());
                 if (state.equals(State.LEFT)) {
-//                    container.setBackgroundColor(Color.parseColor("#FFF"));
                     if (lastToast != null) lastToast.cancel();
                     lastToast = Toast.makeText(getApplicationContext(), "Day mode reader activated", Toast.LENGTH_SHORT);
                     lastToast.show();
+                    mRelativeLayout.setBackgroundColor(Color.parseColor("#f7f6f6"));
+                    mTextView.setTextColor(Color.parseColor("#2d2b2b"));
+
 
                 }
                 if (state.equals(State.RIGHT)) {
-//                    container.setBackgroundColor(Color.parseColor("FFABA7A7"));
                     if (lastToast != null) lastToast.cancel();
                     lastToast = Toast.makeText(getApplicationContext(), "Night mode reader activated", Toast.LENGTH_SHORT);
-
-
                     lastToast.show();
+                    mRelativeLayout.setBackgroundColor(Color.parseColor("#4e4646"));
+                    mTextView.setTextColor(Color.parseColor("#e4e2e2"));
                 }
             }
         });

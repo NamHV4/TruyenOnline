@@ -2,12 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:background="#f7f6f6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     tools:context="com.codedao.truyenonline.view.ReaderActivity">
-
 
 
     <ScrollView
@@ -15,23 +14,24 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/container"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="300px"
                 android:background="@drawable/sea">
+
                 <com.nightonke.jellytogglebutton.JellyToggleButton
+                    android:id="@+id/toggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:jtbJelly="itself"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_alignParentRight="true"
-                    android:id="@+id/toggle"/>
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    app:jtbJelly="itself" />
             </RelativeLayout>
 
 
@@ -99,9 +99,10 @@
                 </RelativeLayout>
 
                 <TextView
-
+                    android:id="@+id/txtConten"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="#2d2b2b"
                     android:text="@string/content_exmaple"
                     android:textSize="15sp" />
             </LinearLayout>
