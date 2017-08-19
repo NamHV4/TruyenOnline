@@ -15,16 +15,18 @@ import android.widget.Toast;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
 import com.codedao.truyenonline.view.fragment.IndexFragment;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+   MaterialSearchView searchView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        searchView=findViewById(R.id.search_view);
         setSupportActionBar(toolbar);
 
 
@@ -62,6 +64,9 @@ public class Screen1 extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.screen1, menu);
+
+        MenuItem item = menu.findItem(R.id.action_searchBar);
+        searchView.setMenuItem(item);
         return true;
     }
 
@@ -75,10 +80,6 @@ public class Screen1 extends BaseActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(Screen1.this,ReaderActivity.class));
-        }
-        if (id == R.id.action_search) {
-            Toast toast=Toast.makeText(getApplicationContext(),"Search",Toast.LENGTH_SHORT);
-            toast.show();
         }
 
         return super.onOptionsItemSelected(item);
