@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://D:\Projects\TruyenOnline\OnlineReader.iml" filepath="D:\Projects\TruyenOnline\OnlineReader.iml" />
       <module fileurl="file://$PROJECT_DIR$/TruyenOnline.iml" filepath="$PROJECT_DIR$/TruyenOnline.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
