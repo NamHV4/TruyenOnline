@@ -88,7 +88,7 @@ public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItem
 
     @Override
     public void onClick(int position) {
-        transitScreen(new Screen3Fragment());
+        transitScreen(new Screen3Fragment(getContext()));
     }
 
     private ArrayList<Truyen> listtruen() {

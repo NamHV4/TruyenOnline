@@ -9,33 +9,77 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
+import com.codedao.truyenonline.model.ConnectService;
 import com.codedao.truyenonline.view.fragment.IndexFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.util.ArrayList;
+
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-   MaterialSearchView searchView;
+    MaterialSearchView searchView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        searchView=findViewById(R.id.search_view);
+        searchView = findViewById(R.id.search_view);
         setSupportActionBar(toolbar);
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fragmentManager=getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten,new IndexFragment());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.conten, new IndexFragment());
         fragmentTransaction.commit();
+
+        searchViewInit();
     }
+
+    private void searchViewInit() {
+
+        searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+
+            }
+        });
+        searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+    }
+
 
     @Override
     protected void setContenView() {
@@ -50,10 +94,14 @@ public class Screen1 extends BaseActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START) ) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-                super.onBackPressed();
+        } else  if (searchView.isSearchOpen()){
+            searchView.closeSearch();
+        }
+
+        else {
+            super.onBackPressed();
         }
 
     }
