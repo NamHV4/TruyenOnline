@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.model.Truyen;
@@ -21,11 +22,13 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
     private List<Truyen> mTruyens;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
+    private IOnItemTruyenListener mIOnItemTruyenListener;
 
-    public TruyenAdapter(List<Truyen> mTruyens, Context mContext) {
+    public TruyenAdapter(List<Truyen> mTruyens, Context mContext, IOnItemTruyenListener iOnItemTruyenListener) {
         this.mTruyens = mTruyens;
         this.mContext = mContext;
         this.mLayoutInflater = LayoutInflater.from(mContext);
+        mIOnItemTruyenListener = iOnItemTruyenListener;
     }
 
     @Override
@@ -43,6 +46,18 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
         holder.tvSoLike.setText(String.valueOf(truyen.getmSoLike()));
         holder.tvTacGia.setText(truyen.getmTacGia());
         holder.ivAvatar.setImageResource(R.drawable.icon_truyen);
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIOnItemTruyenListener.onItemClick();
+            }
+        });
+        holder.imgAddOffine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIOnItemTruyenListener.onOfflineClick();
+            }
+        });
 
     }
 
@@ -57,18 +72,26 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
         private TextView tvTenTruyen;
         private TextView tvTacGia;
         private TextView tvSoLike;
+        private LinearLayout linearLayout;
+        private ImageView imgAddOffine;
 
 
         public TruyenViewHolder(View itemView) {
             super(itemView);
 
+            linearLayout = itemView.findViewById(R.id.linear_screen3);
             tvIdTruyen = itemView.findViewById(R.id.tv_id_truyen);
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
             tvTenTruyen = itemView.findViewById(R.id.tv_ten_truyen);
             tvTacGia = itemView.findViewById(R.id.tv_tac_gia);
             tvSoLike = itemView.findViewById(R.id.tv_so_like);
-
-
+            imgAddOffine = itemView.findViewById(R.id.img_add_offline);
         }
+    }
+
+    public interface IOnItemTruyenListener{
+
+        public void onItemClick();
+        public void onOfflineClick();
     }
 }
