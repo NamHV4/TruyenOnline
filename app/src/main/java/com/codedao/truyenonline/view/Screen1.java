@@ -1,6 +1,5 @@
 package com.codedao.truyenonline.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
@@ -78,9 +76,9 @@ public class Screen1 extends BaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            startActivity(new Intent(Screen1.this,ReaderActivity.class));
-        }
+//        if (id == R.id.action_settings) {
+//            startActivity(new Intent(Screen1.this,ReaderActivity.class));
+//        }
 
         return super.onOptionsItemSelected(item);
     }
