@@ -41,7 +41,7 @@ public class Screen3Presenter implements TruyenAdapter.IOnItemTruyenListener {
 
     public void init() {
         mTruyenDatabaseHepler = new TruyenDatabaseHepler(mContext);
-        initDatabase();
+        //initDatabase();
         mTruyens = new ArrayList<>();
 //        Truyen truyen;
 //        for (int i = 1; i < 100; i++) {
@@ -90,17 +90,17 @@ public class Screen3Presenter implements TruyenAdapter.IOnItemTruyenListener {
         Truyen truyen;
         for (int i = 1; i <= 10; i++) {
             truyen = new Truyen();
-            truyen.setmIdTruyen(i);
+            truyen.setmIdTruyen(""+i);
             truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung");
             truyen.setmTacGia("Jim Rohn");
-            truyen.setmIdTheLoai(idTheLoai);
+            truyen.setmIdTheLoai(""+idTheLoai);
             truyen.setmNgay("20/08/2017");
             truyen.setmNoiDung("Hôm nay thật là vui");
-            truyen.setmSoChuong(1);
-            truyen.setmSoLike(4500 + i+ idTheLoai);
-            truyen.setmLuotXem(10000);
-            truyen.setmAvatar(1);
-            truyen.setmDanhGiau(1);
+            truyen.setmSoChuong(""+1);
+            truyen.setmSoLike(""+4500 + i+ idTheLoai);
+            truyen.setmLuotXem(""+10000);
+            truyen.setmAvatar(""+1);
+            truyen.setmDanhGiau(""+1);
             truyens.add(truyen);
         }
 
@@ -141,7 +141,8 @@ public class Screen3Presenter implements TruyenAdapter.IOnItemTruyenListener {
         }
 
         for (int i = 0; i < truyens.size(); i++){
-            themChuong(truyens.get(i).getmSoChuong(), truyens.get(i).getmIdTruyen());
+            themChuong(Integer.parseInt(truyens.get(i).getmSoChuong()),
+                    Integer.parseInt(truyens.get(i).getmIdTruyen()));
         }
 
         //--------------------------------------

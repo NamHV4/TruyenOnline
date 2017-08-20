@@ -14,11 +14,8 @@ import android.widget.AdapterView;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
-import com.codedao.truyenonline.model.ConnectService;
 import com.codedao.truyenonline.view.fragment.IndexFragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-
-import java.util.ArrayList;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,7 +43,7 @@ public class Screen1 extends BaseActivity
 
     private void searchViewInit() {
 
-        searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
+      //  searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
