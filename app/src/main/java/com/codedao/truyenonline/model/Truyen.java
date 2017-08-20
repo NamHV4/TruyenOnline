@@ -1,51 +1,47 @@
 package com.codedao.truyenonline.model;
 
+import android.util.Log;
+
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by utnam on 7/28/2017.
  */
 
 public class Truyen {
 
-    private int mIdTruyen;
+    @SerializedName("IDT")
+    private String mIdTruyen;
+    @SerializedName("Tentruyen")
     private String mTenTruyen;
+    @SerializedName("Tacgia")
     private String mTacGia;
-    private int mIdTheLoai;
+    @SerializedName("IdTL")
+    private String mIdTheLoai;
+    @SerializedName("Ngay")
     private String mNgay;
+    @SerializedName("Noidung")
     private String mNoiDung;
-    private int mSoChuong;
-    private int mSoLike;
-    private int mLuotXem;
-    private int mAvatar;
-    private int mDanhGiau;
-    private String mTrangThai;
-    private int mSoDiem;
+    @SerializedName("Sochuong")
+    private String mSoChuong;
+    @SerializedName("Likecout")
+    private String mSoLike;
+    @SerializedName("Luotxem")
+    private String mLuotXem;
+    @SerializedName("Avatar")
+    private String mAvatar;
+    @SerializedName("Danhdau")
+    private String mDanhGiau;
 
-
-
-    public int getmSoDiem() {
-        return mSoDiem;
+    public void trace(){
+        Log.e("TAG", "id: " + mIdTruyen +"\nname: " + mTenTruyen +"\navatar: " + mAvatar);
     }
 
-    public void setmSoDiem(int mSoDiem) {
-        this.mSoDiem = mSoDiem;
-    }
-
-    public String getmTrangThai() {
-        return mTrangThai;
-    }
-
-    public void setmTrangThai(String mTrangThai) {
-        this.mTrangThai = mTrangThai;
-    }
-
-    public Truyen() {
-    }
-
-    public int getmIdTruyen() {
+    public String getmIdTruyen() {
         return mIdTruyen;
     }
 
-    public void setmIdTruyen(int mIdTruyen) {
+    public void setmIdTruyen(String mIdTruyen) {
         this.mIdTruyen = mIdTruyen;
     }
 
@@ -65,11 +61,11 @@ public class Truyen {
         this.mTacGia = mTacGia;
     }
 
-    public int getmIdTheLoai() {
+    public String getmIdTheLoai() {
         return mIdTheLoai;
     }
 
-    public void setmIdTheLoai(int mIdTheLoai) {
+    public void setmIdTheLoai(String mIdTheLoai) {
         this.mIdTheLoai = mIdTheLoai;
     }
 
@@ -89,43 +85,43 @@ public class Truyen {
         this.mNoiDung = mNoiDung;
     }
 
-    public int getmSoChuong() {
+    public String getmSoChuong() {
         return mSoChuong;
     }
 
-    public void setmSoChuong(int mSoChuong) {
+    public void setmSoChuong(String mSoChuong) {
         this.mSoChuong = mSoChuong;
     }
 
-    public int getmSoLike() {
+    public String getmSoLike() {
         return mSoLike;
     }
 
-    public void setmSoLike(int mSoLike) {
+    public void setmSoLike(String mSoLike) {
         this.mSoLike = mSoLike;
     }
 
-    public int getmLuotXem() {
+    public String getmLuotXem() {
         return mLuotXem;
     }
 
-    public void setmLuotXem(int mLuotXem) {
+    public void setmLuotXem(String mLuotXem) {
         this.mLuotXem = mLuotXem;
     }
 
-    public int getmAvatar() {
+    public String getmAvatar() {
         return mAvatar;
     }
 
-    public void setmAvatar(int mAvatar) {
+    public void setmAvatar(String mAvatar) {
         this.mAvatar = mAvatar;
     }
 
-    public int getmDanhGiau() {
+    public String getmDanhGiau() {
         return mDanhGiau;
     }
 
-    public void setmDanhGiau(int mDanhGiau) {
+    public void setmDanhGiau(String mDanhGiau) {
         this.mDanhGiau = mDanhGiau;
     }
 }

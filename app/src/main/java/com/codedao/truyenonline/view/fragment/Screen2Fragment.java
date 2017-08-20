@@ -38,8 +38,8 @@ public class Screen2Fragment extends Fragment {
         for (int i=0;i<20;i++){
             Truyen truyen=new Truyen();
             truyen.setmTenTruyen("69 tư thế");
-            truyen.setmSoDiem(4);
-            truyen.setmTrangThai("free");
+            truyen.setmSoLike("4");
+            //truyen.setmTrangThai("free");
             listSuggestion.add(truyen);
         }
 

@@ -58,27 +58,27 @@ public class TruyenDatabaseHepler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String CREATE_TABLE_THE_LOAI = "CREATE TABLE " + TABLE_THE_LOAI + " (" +
-                ID_THE_LOAI + " INTEGER PRIMARY KEY," +
+                ID_THE_LOAI + " TEXT PRIMARY KEY," +
                 TEN_THE_LOAI + " TEXT" + ")";
         sqLiteDatabase.execSQL(CREATE_TABLE_THE_LOAI);
 
         String CREATE_TABLE_TRUYEN = "CREATE TABLE " + TABLE_TRUYEN + " (" +
-                ID_TRUYEN + " INTEGER PRIMARY KEY, " +
+                ID_TRUYEN + " TEXT PRIMARY KEY, " +
                 TEN_TRUYEN + " TEXT, " +
                 TAC_GIA + " TEXT, " +
-                ID_THE_LOAI + " INTEGER, " +
+                ID_THE_LOAI + " TEXT, " +
                 NGAY + " TEXT, " +
                 GIOI_THIEU + " TEXT, " +
-                SO_CHUONG + " INTEGER, " +
-                SO_LIKE + " INTEGER, " +
-                LUOT_XEM + " INTEGER, " +
-                AVATAR + " INTEGER, " +
-                DANH_GIAU + " INTEGER" + ")";
+                SO_CHUONG + " TEXT, " +
+                SO_LIKE + " TEXT, " +
+                LUOT_XEM + " TEXT, " +
+                AVATAR + " TEXT, " +
+                DANH_GIAU + " TEXT" + ")";
         sqLiteDatabase.execSQL(CREATE_TABLE_TRUYEN);
 
         String CREATE_TABLE_CHUONG = "CREATE TABLE " + TABLE_CHUONG + " (" +
-                ID_CHUONG + " INTEGER PRIMARY KEY, " +
-                ID_TRUYEN + " INTEGER, " +
+                ID_CHUONG + " TEXT PRIMARY KEY, " +
+                ID_TRUYEN + " TEXT, " +
                 NOI_DUNG + " TEXT" + ")";
         sqLiteDatabase.execSQL(CREATE_TABLE_CHUONG);
 
@@ -142,17 +142,17 @@ public class TruyenDatabaseHepler extends SQLiteOpenHelper {
             Truyen truyen;
             do {
                 truyen = new Truyen();
-                truyen.setmIdTruyen(cursor.getInt(0));
+                truyen.setmIdTruyen(cursor.getString(0));
                 truyen.setmTenTruyen(cursor.getString(1));
                 truyen.setmTacGia(cursor.getString(2));
-                truyen.setmIdTheLoai(cursor.getInt(3));
+                truyen.setmIdTheLoai(cursor.getString(3));
                 truyen.setmNgay(cursor.getString(4));
                 truyen.setmNoiDung(cursor.getString(5));
-                truyen.setmSoChuong(cursor.getInt(6));
-                truyen.setmSoLike(cursor.getInt(7));
-                truyen.setmLuotXem(cursor.getInt(8));
-                truyen.setmAvatar(cursor.getInt(9));
-                truyen.setmDanhGiau(cursor.getInt(10));
+                truyen.setmSoChuong(cursor.getString(6));
+                truyen.setmSoLike(cursor.getString(7));
+                truyen.setmLuotXem(cursor.getString(8));
+                truyen.setmAvatar(cursor.getString(9));
+                truyen.setmDanhGiau(cursor.getString(10));
                 truyens.add(truyen);
             }while (cursor.moveToNext());
         }

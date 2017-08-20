@@ -38,10 +38,10 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Su
     public void onBindViewHolder(SuggestionAdapter.SuggestionViewholder holder, int position) {
         Truyen truyen = suggestionList.get(position);
 
-        holder.tvSoDiem.setText(truyen.getmSoDiem()+"");
-        holder.tvTrangThai.setText(truyen.getmTrangThai());
+        holder.tvSoDiem.setText(truyen.getmSoLike()+"");
+        holder.tvTrangThai.setText(truyen.getmDanhGiau());
         holder.tvTenTruyen.setText(truyen.getmTenTruyen());
-        holder.imgAvatar.setImageResource(truyen.getmAvatar());
+        holder.imgAvatar.setImageResource(R.drawable.avata);
     }
 
     @Override

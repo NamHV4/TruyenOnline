@@ -8,8 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codedao.truyenonline.R;
+import com.codedao.truyenonline.model.Type;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +19,10 @@ import java.util.List;
 public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.MyViewHolder> {
 
     private IOnItemClickListener mIOnItemClickListener;
-    private List<String> mHorizontalList;
+    private List<Type> mHorizontalList;
 
 
-    public HorizontalAdapter(ArrayList<String> horizontalList, IOnItemClickListener iOnItemClickListener) {
+    public HorizontalAdapter(List<Type> horizontalList, IOnItemClickListener iOnItemClickListener) {
         this.mHorizontalList = horizontalList;
         this.mIOnItemClickListener = iOnItemClickListener;
     }
@@ -37,7 +37,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<HorizontalAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.textView.setText(mHorizontalList.get(position));
+        holder.textView.setText(mHorizontalList.get(position).getTenTL());
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
