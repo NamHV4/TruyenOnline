@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +15,14 @@ import android.widget.AdapterView;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
+import com.codedao.truyenonline.model.ApiConnect;
+import com.codedao.truyenonline.model.MessageEvent;
 import com.codedao.truyenonline.view.fragment.Screen1Fragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,17 +40,42 @@ public class Screen1 extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        attachScreen1Fragment();
+        eventBusInit();
+        searchViewInit();
+    }
+
+    private void attachScreen1Fragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.conten, new Screen1Fragment());
         fragmentTransaction.commit();
+    }
 
-        searchViewInit();
+    private void eventBusInit() {
+        EventBus eventBus = EventBus.getDefault();
+        eventBus.register(this);
+        ApiConnect apiConnect = new ApiConnect();
+        apiConnect.getAllTitleStory();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
+            String[] suggestionList = new String[event.getmTruyens().size()];
+            for (int i = 0; i < suggestionList.length; i++) {
+                suggestionList[i] = event.getmTruyens().get(i).getmTenTruyen();
+
+            }
+            searchView.setSuggestions(suggestionList);
+        }
     }
 
     private void searchViewInit() {
 
-        searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
+        searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));
+
+
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
