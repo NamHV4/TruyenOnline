@@ -15,19 +15,16 @@ import android.view.ViewGroup;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.adapter.HorizontalAdapter;
 import com.codedao.truyenonline.adapter.IndexAdapter;
+import com.codedao.truyenonline.model.ApiConnect;
 import com.codedao.truyenonline.model.Index;
+import com.codedao.truyenonline.model.MessageEvent;
 import com.codedao.truyenonline.model.Truyen;
-import com.codedao.truyenonline.model.Type;
-import com.codedao.truyenonline.model.TypeResponse;
-import com.codedao.truyenonline.rest.ApiClient;
-import com.codedao.truyenonline.rest.ApiInterface;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,7 +53,6 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         mRecyclerView = view.findViewById(R.id.rcView);
 
 
-
         mIndexArrayListl = new ArrayList<>();
         for (int i = 0; i <= 1000; i++) {
             mIndexArrayListl.add(new Index("Truỵện mới nhất", listtruen()));
@@ -66,29 +62,39 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerViewIndex.setLayoutManager(linearLayoutManager);
         mRecyclerViewIndex.setAdapter(mIndexAdapter);
+        EventBus eventBus = EventBus.getDefault();
+        eventBus.register(this);
 
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+        ApiConnect apiConnect = new ApiConnect();
+        apiConnect.getAllTitleStory();
 
-        Call<TypeResponse> call = apiService.getAllType();
-        call.enqueue(new Callback<TypeResponse>() {
-            @Override
-            public void onResponse(Call<TypeResponse> call, Response<TypeResponse> response) {
-                List<Type> typeList = response.body().getmTypeList();
-                horizontalAdapter = new HorizontalAdapter(typeList, Screen1Fragment.this);
 
-                LinearLayoutManager horizontalLayoutManagaer
-                        = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                mRecyclerView.setLayoutManager(horizontalLayoutManagaer);
-                mRecyclerView.setAdapter(horizontalAdapter);
-            }
 
-            @Override
-            public void onFailure(Call<TypeResponse> call, Throwable t) {
-                // Log error here since request failed
-                Log.e("NAMHV4", t.toString());
-            }
-        });
+//        ApiInterface apiService =
+//                ApiClient.getClient().create(ApiInterface.class);
+//
+//        Call<StoryResponse> call = apiService.getAllTitle();
+//        call.enqueue(new Callback<StoryResponse>() {
+//            @Override
+//            public void onResponse(Call<StoryResponse> call, Response<StoryResponse> response) {
+//                List<Truyen> typeList = response.body().getmTruyenList();
+//                for (Truyen truyen : typeList) {
+//                   truyen.trace();
+//                }
+////                horizontalAdapter = new HorizontalAdapter(typeList, Screen1Fragment.this);
+////
+////                LinearLayoutManager horizontalLayoutManagaer
+////                        = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+////                mRecyclerView.setLayoutManager(horizontalLayoutManagaer);
+////                mRecyclerView.setAdapter(horizontalAdapter);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<StoryResponse> call, Throwable t) {
+//                // Log error here since request failed
+//                Log.e("NAMHV4", t.toString());
+//            }
+//        });
 
         return view;
     }
@@ -122,4 +128,11 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-}
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
+            Log.d("onMessageEvent", "Size" + event.getmTruyens().size());
+        }
+    }
+};
