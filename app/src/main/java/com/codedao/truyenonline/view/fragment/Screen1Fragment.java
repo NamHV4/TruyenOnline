@@ -32,7 +32,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItemClickListener, IndexAdapter.IOnItemClickListener {
+public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnItemClickListener, IndexAdapter.IOnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private HorizontalAdapter horizontalAdapter;
@@ -41,7 +41,7 @@ public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItem
     private IndexAdapter mIndexAdapter;
     private ArrayList<Index> mIndexArrayListl;
 
-    public IndexFragment() {
+    public Screen1Fragment() {
         // Required empty public constructor
     }
 
@@ -75,7 +75,7 @@ public class IndexFragment extends Fragment implements HorizontalAdapter.IOnItem
             @Override
             public void onResponse(Call<TypeResponse> call, Response<TypeResponse> response) {
                 List<Type> typeList = response.body().getmTypeList();
-                horizontalAdapter = new HorizontalAdapter(typeList, IndexFragment.this);
+                horizontalAdapter = new HorizontalAdapter(typeList, Screen1Fragment.this);
 
                 LinearLayoutManager horizontalLayoutManagaer
                         = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);

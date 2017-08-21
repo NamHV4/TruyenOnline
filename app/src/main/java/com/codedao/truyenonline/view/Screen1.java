@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
-import com.codedao.truyenonline.view.fragment.IndexFragment;
+import com.codedao.truyenonline.view.fragment.Screen1Fragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 public class Screen1 extends BaseActivity
@@ -35,7 +35,7 @@ public class Screen1 extends BaseActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten, new IndexFragment());
+        fragmentTransaction.replace(R.id.conten, new Screen1Fragment());
         fragmentTransaction.commit();
 
         searchViewInit();

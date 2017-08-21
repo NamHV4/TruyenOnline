@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.fragment.IndexFragment">
+    tools:context=".view.fragment.Screen1Fragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcView"
