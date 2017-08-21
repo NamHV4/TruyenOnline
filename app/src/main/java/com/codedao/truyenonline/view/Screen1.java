@@ -43,7 +43,7 @@ public class Screen1 extends BaseActivity
 
     private void searchViewInit() {
 
-      //  searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
+        searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
