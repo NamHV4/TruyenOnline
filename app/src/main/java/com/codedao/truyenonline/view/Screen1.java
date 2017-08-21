@@ -48,7 +48,7 @@ public class Screen1 extends BaseActivity
     private void attachScreen1Fragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten, new Screen1Fragment());
+        fragmentTransaction.replace(R.id.content, new Screen1Fragment());
         fragmentTransaction.commit();
     }
 
@@ -73,7 +73,7 @@ public class Screen1 extends BaseActivity
 
     private void searchViewInit() {
 
-        searchView.setSuggestions(getResources().getStringArray(R.array.query_suggestions));
+
 
 
 
@@ -139,9 +139,6 @@ public class Screen1 extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.screen1, menu);
-
-        MenuItem item = menu.findItem(R.id.action_searchBar);
-        searchView.setMenuItem(item);
         return true;
     }
 
@@ -151,7 +148,10 @@ public class Screen1 extends BaseActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        if (item.getItemId() == R.id.action_searchBar) {
+            searchView.showSearch(true);
+            searchView.setVisibility(View.VISIBLE);
+        }
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            startActivity(new Intent(Screen1.this,ReaderActivity.class));

@@ -120,7 +120,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
     private void transitScreen(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten, fragment);
+        fragmentTransaction.replace(R.id.content, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
