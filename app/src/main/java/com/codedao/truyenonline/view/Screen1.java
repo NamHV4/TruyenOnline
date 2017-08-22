@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
@@ -42,7 +43,12 @@ public class Screen1 extends BaseActivity
 
         attachScreen1Fragment();
         eventBusInit();
-        searchViewInit();
+       searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               Log.d("minhtq","ahihi");
+           }
+       });
     }
 
     private void attachScreen1Fragment() {
@@ -62,52 +68,17 @@ public class Screen1 extends BaseActivity
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
         if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
-            String[] suggestionList = new String[event.getmTruyens().size()];
-            for (int i = 0; i < suggestionList.length; i++) {
-                suggestionList[i] = event.getmTruyens().get(i).getmTenTruyen();
-
+            String[] suggestionListName = new String[event.getmTruyens().size()];
+            String[] suggestionListID = new String[event.getmTruyens().size()];
+            for (int i = 0; i < suggestionListName.length; i++) {
+                suggestionListName[i] = event.getmTruyens().get(i).getmTenTruyen();
+                suggestionListID[i] = event.getmTruyens().get(i).getmIdTruyen();
             }
-            searchView.setSuggestions(suggestionList);
+            searchView.setSuggestions(suggestionListName);
         }
     }
 
-    private void searchViewInit() {
 
-
-
-
-
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return false;
-            }
-        });
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-
-            }
-        });
-        searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
-    }
 
 
     @Override
