@@ -7,15 +7,23 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
+import com.codedao.truyenonline.model.ApiConnect;
+import com.codedao.truyenonline.model.MessageEvent;
 import com.codedao.truyenonline.view.fragment.Screen1Fragment;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,49 +41,44 @@ public class Screen1 extends BaseActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        attachScreen1Fragment();
+        eventBusInit();
+       searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+               Log.d("minhtq","ahihi");
+           }
+       });
+    }
+
+    private void attachScreen1Fragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten, new Screen1Fragment());
+        fragmentTransaction.replace(R.id.content, new Screen1Fragment());
         fragmentTransaction.commit();
-
-        searchViewInit();
     }
 
-    private void searchViewInit() {
-
-        searchView.setSuggestions(new String[]{"android","bphone","python","bphone 2017","android kitkat","android nougat"});
-
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                return false;
-            }
-        });
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-
-            }
-        });
-        searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
+    private void eventBusInit() {
+        EventBus eventBus = EventBus.getDefault();
+        eventBus.register(this);
+        ApiConnect apiConnect = new ApiConnect();
+        apiConnect.getAllTitleStory();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
+            String[] suggestionListName = new String[event.getmTruyens().size()];
+            String[] suggestionListID = new String[event.getmTruyens().size()];
+            for (int i = 0; i < suggestionListName.length; i++) {
+                suggestionListName[i] = event.getmTruyens().get(i).getmTenTruyen();
+                suggestionListID[i] = event.getmTruyens().get(i).getmIdTruyen();
+            }
+            searchView.setSuggestions(suggestionListName);
+        }
+    }
+
+
 
 
     @Override
@@ -107,9 +110,6 @@ public class Screen1 extends BaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.screen1, menu);
-
-        MenuItem item = menu.findItem(R.id.action_searchBar);
-        searchView.setMenuItem(item);
         return true;
     }
 
@@ -119,7 +119,10 @@ public class Screen1 extends BaseActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        if (item.getItemId() == R.id.action_searchBar) {
+            searchView.showSearch(true);
+            searchView.setVisibility(View.VISIBLE);
+        }
         //noinspection SimplifiableIfStatement
 //        if (id == R.id.action_settings) {
 //            startActivity(new Intent(Screen1.this,ReaderActivity.class));

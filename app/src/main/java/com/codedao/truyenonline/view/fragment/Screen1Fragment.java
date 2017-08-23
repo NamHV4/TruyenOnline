@@ -62,11 +62,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerViewIndex.setLayoutManager(linearLayoutManager);
         mRecyclerViewIndex.setAdapter(mIndexAdapter);
-        EventBus eventBus = EventBus.getDefault();
-        eventBus.register(this);
 
-        ApiConnect apiConnect = new ApiConnect();
-        apiConnect.getAllTitleStory();
 
 
 
@@ -124,15 +120,9 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
     private void transitScreen(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.conten, fragment);
+        fragmentTransaction.replace(R.id.content, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
-        if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
-            Log.d("onMessageEvent", "Size" + event.getmTruyens().size());
-        }
-    }
 };

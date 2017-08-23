@@ -16,7 +16,7 @@ import retrofit2.Response;
  */
 
 public class ApiConnect {
-
+    public static List<Truyen> truyenList;
 
     public void getAllTitleStory() {
         ApiInterface apiService =
@@ -26,7 +26,7 @@ public class ApiConnect {
         call.enqueue(new Callback<StoryResponse>() {
             @Override
             public void onResponse(Call<StoryResponse> call, Response<StoryResponse> response) {
-                List<Truyen> truyenList = response.body().getmTruyenList();
+                truyenList = response.body().getmTruyenList();
                 MessageEvent messageEvent=new MessageEvent();
                 messageEvent.setmTruyens(truyenList);
                 messageEvent.setmEvent("GET_SUCCSESS_LIST");
