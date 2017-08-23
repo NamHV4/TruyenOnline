@@ -6,32 +6,42 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:icon="@drawable/ic_file_download_black_48dp"
+            android:title="Đọc offline" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:icon="@drawable/icons_like"
+            android:title="Đã thích" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:icon="@drawable/night_mode"
+            android:title="Chế độ ban đêm" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Setting" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Sản phẩm">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Phiên bản hiện tại 1.0" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Điều khoản sử dụng" />
+
+            <item
+                android:id="@+id/nav_vote"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Bình chọn cho Thiên Địa Truyện" />
+
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Gửi mail góp ý" />
         </menu>
     </item>
 
