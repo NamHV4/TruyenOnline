@@ -6,5 +6,5 @@ package com.codedao.truyenonline.presenter;
 
 public interface IScreen1PresenterImp {
     void getListType();
-    void getListStoryNew();
+    void getListStoryIndex();
 }

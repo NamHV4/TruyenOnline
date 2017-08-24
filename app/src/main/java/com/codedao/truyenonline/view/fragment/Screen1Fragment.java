@@ -45,25 +45,23 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, container, false);
         initView(view);
-
         mScreen1PresenterLogic = new Screen1PresenterLogic(this);
         mScreen1PresenterLogic.getListType();
-        mScreen1PresenterLogic.getListStoryNew();
+        mScreen1PresenterLogic.getListStoryIndex();
 
-        //Fake Data
-        mIndexArrayListl = new ArrayList<>();
-        for (int i = 0; i <= 1000; i++) {
-            mIndexArrayListl.add(new Index("Truỵện mới nhất", listtruen()));
-        }
-        mIndexAdapter = new IndexAdapter(mIndexArrayListl, getContext(), this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
-                LinearLayoutManager.VERTICAL, false);
-        mRecyclerViewIndex.setLayoutManager(linearLayoutManager);
-        mRecyclerViewIndex.setAdapter(mIndexAdapter);
 
+//        //Fake Data
+//        mIndexArrayListl = new ArrayList<>();
+//        for (int i = 0; i <= 1000; i++) {
+//            mIndexArrayListl.add(new Index("Truỵện mới nhất", listtruen()));
+//        }
+//
+//
 
         return view;
     }
+
+
 
     private void initView(View view) {
         mRecyclerViewIndex = view.findViewById(R.id.rcIndex);
@@ -111,6 +109,10 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void setAdapterIndex(List<Index> index) {
-
+        mIndexAdapter = new IndexAdapter(index, getContext(), this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        mRecyclerViewIndex.setLayoutManager(linearLayoutManager);
+        mRecyclerViewIndex.setAdapter(mIndexAdapter);
     }
-};
+}
