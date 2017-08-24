@@ -12,18 +12,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
+import com.codedao.materialsearchview.MaterialSearchView;
+import com.codedao.materialsearchview.Story;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.base.BaseActivity;
 import com.codedao.truyenonline.model.ApiConnect;
 import com.codedao.truyenonline.model.MessageEvent;
+import com.codedao.truyenonline.model.Truyen;
 import com.codedao.truyenonline.view.fragment.Screen1Fragment;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,12 +47,7 @@ public class Screen1 extends BaseActivity
 
         attachScreen1Fragment();
         eventBusInit();
-       searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Log.d("minhtq","ahihi");
-           }
-       });
+
     }
 
     private void attachScreen1Fragment() {
@@ -68,17 +67,31 @@ public class Screen1 extends BaseActivity
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
         if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
-            String[] suggestionListName = new String[event.getmTruyens().size()];
-            String[] suggestionListID = new String[event.getmTruyens().size()];
+            final List<Truyen> truyenList = event.getmTruyens();
+            int size = event.getmTruyens().size();
+            List<Story> stories=new ArrayList<>();
+            for (int i=0;i<size;i++){
+                stories.add(new Story(truyenList.get(i).getmIdTruyen()
+                        ,truyenList.get(i).getmTenTruyen()));
+            }
+
+
+            final String[] suggestionListName = new String[event.getmTruyens().size()];
+            final String[] suggestionListID = new String[event.getmTruyens().size()];
             for (int i = 0; i < suggestionListName.length; i++) {
                 suggestionListName[i] = event.getmTruyens().get(i).getmTenTruyen();
                 suggestionListID[i] = event.getmTruyens().get(i).getmIdTruyen();
             }
-            searchView.setSuggestions(suggestionListName);
+            searchView.setSuggestions(stories);
+            searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                 Story a = (Story) adapterView.getItemAtPosition(i);
+                    Log.d("Nam","name="+a.getValue().toString()+" id="+a.getKey().toString());
+                }
+            });
         }
     }
-
-
 
 
     @Override
@@ -94,13 +107,11 @@ public class Screen1 extends BaseActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START) ) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else  if (searchView.isSearchOpen()){
+        } else if (searchView.isSearchOpen()) {
             searchView.closeSearch();
-        }
-
-        else {
+        } else {
             super.onBackPressed();
         }
 

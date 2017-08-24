@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,28 +14,26 @@ import android.view.ViewGroup;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.adapter.HorizontalAdapter;
 import com.codedao.truyenonline.adapter.IndexAdapter;
-import com.codedao.truyenonline.model.ApiConnect;
 import com.codedao.truyenonline.model.Index;
-import com.codedao.truyenonline.model.MessageEvent;
 import com.codedao.truyenonline.model.Truyen;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.codedao.truyenonline.model.Type;
+import com.codedao.truyenonline.presenter.Screen1PresenterLogic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnItemClickListener, IndexAdapter.IOnItemClickListener {
+public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnItemClickListener
+        , IndexAdapter.IOnItemClickListener, IScreen1View {
 
     private RecyclerView mRecyclerView;
-    private HorizontalAdapter horizontalAdapter;
-    private ArrayList<String> horizontalList;
+    private HorizontalAdapter mHorizontalAdapter;
     private RecyclerView mRecyclerViewIndex;
     private IndexAdapter mIndexAdapter;
     private ArrayList<Index> mIndexArrayListl;
+    Screen1PresenterLogic mScreen1PresenterLogic;
 
     public Screen1Fragment() {
         // Required empty public constructor
@@ -47,12 +44,13 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_index, container, false);
+        initView(view);
 
+        mScreen1PresenterLogic = new Screen1PresenterLogic(this);
+        mScreen1PresenterLogic.getListType();
+        mScreen1PresenterLogic.getListStoryNew();
 
-        mRecyclerViewIndex = view.findViewById(R.id.rcIndex);
-        mRecyclerView = view.findViewById(R.id.rcView);
-
-
+        //Fake Data
         mIndexArrayListl = new ArrayList<>();
         for (int i = 0; i <= 1000; i++) {
             mIndexArrayListl.add(new Index("Truỵện mới nhất", listtruen()));
@@ -64,37 +62,13 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         mRecyclerViewIndex.setAdapter(mIndexAdapter);
 
 
-
-
-//        ApiInterface apiService =
-//                ApiClient.getClient().create(ApiInterface.class);
-//
-//        Call<StoryResponse> call = apiService.getAllTitle();
-//        call.enqueue(new Callback<StoryResponse>() {
-//            @Override
-//            public void onResponse(Call<StoryResponse> call, Response<StoryResponse> response) {
-//                List<Truyen> typeList = response.body().getmTruyenList();
-//                for (Truyen truyen : typeList) {
-//                   truyen.trace();
-//                }
-////                horizontalAdapter = new HorizontalAdapter(typeList, Screen1Fragment.this);
-////
-////                LinearLayoutManager horizontalLayoutManagaer
-////                        = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-////                mRecyclerView.setLayoutManager(horizontalLayoutManagaer);
-////                mRecyclerView.setAdapter(horizontalAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<StoryResponse> call, Throwable t) {
-//                // Log error here since request failed
-//                Log.e("NAMHV4", t.toString());
-//            }
-//        });
-
         return view;
     }
 
+    private void initView(View view) {
+        mRecyclerViewIndex = view.findViewById(R.id.rcIndex);
+        mRecyclerView = view.findViewById(R.id.rcView);
+    }
 
     @Override
     public void onClick(int position) {
@@ -125,4 +99,18 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         fragmentTransaction.commit();
     }
 
+
+    @Override
+    public void setAdapterType(List<Type> type) {
+        mHorizontalAdapter = new HorizontalAdapter(type, Screen1Fragment.this);
+        LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(),
+                LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(horizontalLayoutManagaer);
+        mRecyclerView.setAdapter(mHorizontalAdapter);
+    }
+
+    @Override
+    public void setAdapterIndex(List<Index> index) {
+
+    }
 };

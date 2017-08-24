@@ -7,8 +7,17 @@ import java.util.List;
  */
 
 public class MessageEvent {
-    public String mEvent;
-    public List<Truyen> mTruyens;
+    private String mEvent;
+    private List<Truyen> mTruyens;
+    private List<Type> mTypeList;
+
+    public List<Type> getmTypeList() {
+        return mTypeList;
+    }
+
+    public void setmTypeList(List<Type> mTypeList) {
+        this.mTypeList = mTypeList;
+    }
 
     public List<Truyen> getmTruyens() {
         return mTruyens;
