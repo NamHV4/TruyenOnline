@@ -23,4 +23,10 @@ public interface ApiInterface {
 
     @GET("get_truyen_new.php")
     Call<StoryResponse> getTopNew();
+
+    @GET("get_truyen_toplike.php")
+    Call<StoryResponse> getTopLike();
+
+    @GET("get_truyen_topview.php")
+    Call<StoryResponse> getTopView();
 }

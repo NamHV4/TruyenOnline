@@ -18,10 +18,13 @@ import retrofit2.Response;
  */
 
 public class ApiConnect {
-    public static final String GET_SUCCSES_LIST_TYPE="GET_SUCCSES_LIST_TYPE";
-    public static final String GET_SUCCSES_LIST_STORY="GET_SUCCSES_LIST_STORY";
+    public static final String GET_SUCCSES_LIST_TYPE = "GET_SUCCSES_LIST_TYPE";
+    public static final String GET_SUCCSES_LIST_STORY = "GET_SUCCSES_LIST_STORY";
+    public static final String GET_SUCCSES_LIST_STORY_TOPLIKE = "GET_SUCCSES_LIST_STORY_TOPLIKE";
+    public static final String GET_SUCCSES_LIST_STORY_TOPVIEW = "GET_SUCCSES_LIST_STORY_TOPVIEW";
     ApiInterface mApi =
             ApiClient.getClient().create(ApiInterface.class);
+
 
     public void getAllTitleStory() {
 
@@ -30,11 +33,15 @@ public class ApiConnect {
         call.enqueue(new Callback<StoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
-               List<Truyen> truyenList = response.body().getmTruyenList();
-                MessageEvent messageEvent = new MessageEvent();
-                messageEvent.setmTruyens(truyenList);
-                messageEvent.setmEvent("GET_SUCCSESS_LIST");
-                EventBus.getDefault().post(messageEvent);
+                if (response.isSuccessful()) {
+                    List<Truyen> truyenList = response.body().getmTruyenList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTruyens(truyenList);
+                    messageEvent.setmEvent("GET_SUCCSESS_LIST");
+                    EventBus.getDefault().post(messageEvent);
+                }else {
+                    getAllTitleStory();
+                }
             }
 
             @Override
@@ -49,12 +56,16 @@ public class ApiConnect {
         Call<TypeResponse> call = mApi.getAllType();
         call.enqueue(new Callback<TypeResponse>() {
             @Override
-            public void onResponse(Call<TypeResponse> call, Response<TypeResponse> response) {
-                List<Type> typeList = response.body().getmTypeList();
-                MessageEvent messageEvent = new MessageEvent();
-                messageEvent.setmTypeList(typeList);
-                messageEvent.setmEvent(GET_SUCCSES_LIST_TYPE);
-                EventBus.getDefault().post(messageEvent);
+            public void onResponse(@NonNull Call<TypeResponse> call, @NonNull Response<TypeResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Type> typeList = response.body().getmTypeList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTypeList(typeList);
+                    messageEvent.setmEvent(GET_SUCCSES_LIST_TYPE);
+                    EventBus.getDefault().post(messageEvent);
+                }else {
+                    getAllType();
+                }
 
             }
 
@@ -71,12 +82,67 @@ public class ApiConnect {
         Call<StoryResponse> call = mApi.getTopNew();
         call.enqueue(new Callback<StoryResponse>() {
             @Override
-            public void onResponse(Call<StoryResponse> call, Response<StoryResponse> response) {
-                List<Truyen> storyList = response.body().getmTruyenList();
-                MessageEvent messageEvent = new MessageEvent();
-                messageEvent.setmTruyens(storyList);
-                messageEvent.setmEvent(GET_SUCCSES_LIST_STORY);
-                EventBus.getDefault().post(messageEvent);
+            public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Truyen> storyList = response.body().getmTruyenList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTruyens(storyList);
+                    messageEvent.setmEvent(GET_SUCCSES_LIST_STORY);
+                    EventBus.getDefault().post(messageEvent);
+
+                }else {
+                    getTopNewStory();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoryResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void getTopLikeStory() {
+
+        Call<StoryResponse> call = mApi.getTopLike();
+        call.enqueue(new Callback<StoryResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Truyen> storyList = response.body().getmTruyenList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTruyens(storyList);
+                    messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_TOPLIKE);
+                    EventBus.getDefault().post(messageEvent);
+                }else {
+                    getTopLikeStory();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoryResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void getTopViewStory() {
+
+        Call<StoryResponse> call = mApi.getTopView();
+        call.enqueue(new Callback<StoryResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Truyen> storyList = response.body().getmTruyenList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTruyens(storyList);
+                    messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_TOPVIEW);
+                    EventBus.getDefault().post(messageEvent);
+                }else {
+                    getTopViewStory();
+                }
 
             }
 
