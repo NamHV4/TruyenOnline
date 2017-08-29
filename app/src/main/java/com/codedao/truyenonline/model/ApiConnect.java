@@ -77,9 +77,9 @@ public class ApiConnect {
 
     }
 
-    public void getTopNewStory() {
+    public void getTopNewStory(final int limit) {
 
-        Call<StoryResponse> call = mApi.getTopNew();
+        Call<StoryResponse> call = mApi.getTopNew(limit);
         call.enqueue(new Callback<StoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
@@ -91,7 +91,7 @@ public class ApiConnect {
                     EventBus.getDefault().post(messageEvent);
 
                 }else {
-                    getTopNewStory();
+                    getTopNewStory(limit);
                 }
             }
 
@@ -103,9 +103,9 @@ public class ApiConnect {
 
     }
 
-    public void getTopLikeStory() {
+    public void getTopLikeStory(final int limit) {
 
-        Call<StoryResponse> call = mApi.getTopLike();
+        Call<StoryResponse> call = mApi.getTopLike(limit);
         call.enqueue(new Callback<StoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
@@ -116,7 +116,7 @@ public class ApiConnect {
                     messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_TOPLIKE);
                     EventBus.getDefault().post(messageEvent);
                 }else {
-                    getTopLikeStory();
+                    getTopLikeStory(limit);
                 }
             }
 
@@ -128,9 +128,9 @@ public class ApiConnect {
 
     }
 
-    public void getTopViewStory() {
+    public void getTopViewStory(final int limit) {
 
-        Call<StoryResponse> call = mApi.getTopView();
+        Call<StoryResponse> call = mApi.getTopView(limit);
         call.enqueue(new Callback<StoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
@@ -141,7 +141,7 @@ public class ApiConnect {
                     messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_TOPVIEW);
                     EventBus.getDefault().post(messageEvent);
                 }else {
-                    getTopViewStory();
+                    getTopViewStory(limit);
                 }
 
             }

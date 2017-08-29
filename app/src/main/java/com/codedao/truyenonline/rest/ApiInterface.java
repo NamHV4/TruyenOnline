@@ -22,11 +22,11 @@ public interface ApiInterface {
     Call<TypeResponse> getAllType();
 
     @GET("get_truyen_new.php")
-    Call<StoryResponse> getTopNew();
+    Call<StoryResponse> getTopNew(@Query("limit") int limit);
 
     @GET("get_truyen_toplike.php")
-    Call<StoryResponse> getTopLike();
+    Call<StoryResponse> getTopLike(@Query("limit") int limit);
 
     @GET("get_truyen_topview.php")
-    Call<StoryResponse> getTopView();
+    Call<StoryResponse> getTopView(@Query("limit") int limit);
 }
