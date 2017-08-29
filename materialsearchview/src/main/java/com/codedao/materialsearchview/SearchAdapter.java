@@ -3,6 +3,7 @@ package com.codedao.materialsearchview;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
         Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
+                Log.d("Nam","constraint="+constraint);
                 FilterResults filterResults = new FilterResults();
                 if (!TextUtils.isEmpty(constraint)) {
 
@@ -54,9 +56,11 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
                     List<Story> searchData = new ArrayList<>();
 
                     for (Story string : suggestions) {
-                        if (string.getValue().toString().toLowerCase().startsWith(constraint.toString().toLowerCase())) {
+                        if (string.getValue().toString().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                            Log.d("Nam","getValue="+string.getValue().toString());
                             searchData.add(string);
                         }
+
                     }
 
                     // Assign the data to the FilterResults
