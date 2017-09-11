@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.model.Truyen;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,27 +22,35 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Su
     ArrayList<Truyen> suggestionList;
     Context context;
     LayoutInflater layoutInflater;
+    IClickAvata mIClickAvata;
 
-    public SuggestionAdapter(ArrayList<Truyen> suggestionList, Context context) {
+    public SuggestionAdapter(ArrayList<Truyen> suggestionList, Context context, IClickAvata iClickAvata) {
         this.suggestionList = suggestionList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
+        this.mIClickAvata = iClickAvata;
     }
 
     @Override
     public SuggestionAdapter.SuggestionViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.layout_item_screen2,parent, false);
+        View view = layoutInflater.inflate(R.layout.layout_item_screen2, parent, false);
         return new SuggestionViewholder(view);
     }
 
     @Override
     public void onBindViewHolder(SuggestionAdapter.SuggestionViewholder holder, int position) {
-        Truyen truyen = suggestionList.get(position);
+        final Truyen truyen = suggestionList.get(position);
 
-        holder.tvSoDiem.setText(truyen.getmSoLike()+"");
+        holder.tvSoDiem.setText(truyen.getmSoLike());
         holder.tvTrangThai.setText(truyen.getmDanhGiau());
         holder.tvTenTruyen.setText(truyen.getmTenTruyen());
-        holder.imgAvatar.setImageResource(R.drawable.avata);
+        Picasso.with(context).load(truyen.getmAvatar()).into(holder.imgAvatar);
+        holder.imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIClickAvata.onclickAvt(truyen);
+            }
+        });
     }
 
     @Override
@@ -54,12 +63,19 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Su
         private TextView tvTenTruyen;
         private TextView tvSoDiem;
         private TextView tvTrangThai;
+
         public SuggestionViewholder(View itemView) {
             super(itemView);
-            imgAvatar=itemView.findViewById(R.id.imgAvatar);
-            tvTenTruyen=itemView.findViewById(R.id.tvName);
-            tvSoDiem=itemView.findViewById(R.id.tvMark);
-            tvTrangThai=itemView.findViewById(R.id.tvStatus);
+            imgAvatar = itemView.findViewById(R.id.imgAvatar);
+            tvTenTruyen = itemView.findViewById(R.id.tvName);
+            tvSoDiem = itemView.findViewById(R.id.tvMark);
+            tvTrangThai = itemView.findViewById(R.id.tvStatus);
         }
     }
+
+    public interface IClickAvata {
+        void onclickAvt(Truyen truyen);
+    }
+
 }
+
