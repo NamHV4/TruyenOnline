@@ -19,7 +19,7 @@ import java.util.List;
  * Created by utnam on 8/17/2017.
  */
 
-public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder> {
+public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder> implements SuggestionAdapter.IClickAvata {
 
     private Context mContext;
     private List<Index> mIndexList;
@@ -30,6 +30,11 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder
         this.mIndexList = mIndexList;
         this.mContext = context;
         this.mIOnItemClickListener = iOnItemClickListener;
+    }
+
+    @Override
+    public void onclickAvt(Truyen truyen) {
+        mIOnItemClickListener.onClickavata(truyen);
     }
 
 
@@ -56,7 +61,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         Index index = mIndexList.get(position);
-        mSuggestionAdapter = new SuggestionAdapter((ArrayList<Truyen>) index.getmTruyens(), this.mContext);
+        mSuggestionAdapter = new SuggestionAdapter((ArrayList<Truyen>) index.getmTruyens(), this.mContext, this);
         holder.txtTitle.setText(index.getmTitle());
         LinearLayoutManager linearLayoutManager
                 = new LinearLayoutManager(this.mContext,
@@ -80,7 +85,9 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder
 
     public interface IOnItemClickListener {
 
-        public void onClickItem(int position);
+        void onClickItem(int position);
+
+        void onClickavata(Truyen truyen);
     }
 
 }

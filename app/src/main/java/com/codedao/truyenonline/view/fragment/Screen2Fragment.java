@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Screen2Fragment extends Fragment {
+public class Screen2Fragment extends Fragment implements SuggestionAdapter.IClickAvata {
     RecyclerView rcvScreen2;
     ArrayList<Truyen> listSuggestion;
     SuggestionAdapter suggestionAdapter;
@@ -43,7 +43,7 @@ public class Screen2Fragment extends Fragment {
             listSuggestion.add(truyen);
         }
 
-        suggestionAdapter=new SuggestionAdapter(listSuggestion,getContext());
+        suggestionAdapter=new SuggestionAdapter(listSuggestion,getContext(),this);
         rcvScreen2.setAdapter(suggestionAdapter);
 
         RecyclerView.LayoutManager layoutManager=new GridLayoutManager(getContext(),3);
@@ -51,4 +51,8 @@ public class Screen2Fragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onclickAvt(Truyen truyen) {
+
+    }
 }

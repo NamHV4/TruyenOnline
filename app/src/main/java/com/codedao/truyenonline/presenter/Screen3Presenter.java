@@ -42,7 +42,7 @@ public class Screen3Presenter implements TruyenAdapter.IOnItemAdapterTruyenListe
 
     public void init() {
         mTruyenDatabaseHepler = new TruyenDatabaseHepler(mContext);
-        //initDatabase();
+        initDatabase();
         mTruyens = new ArrayList<>();
 //        Truyen truyen;
 //        for (int i = 1; i < 100; i++) {

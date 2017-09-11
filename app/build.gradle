@@ -42,4 +42,5 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.8.1'
     compile 'org.greenrobot:eventbus:3.0.0'
     implementation project(':materialsearchview')
+    implementation files('libs/picasso-2.5.2.jar')
 }

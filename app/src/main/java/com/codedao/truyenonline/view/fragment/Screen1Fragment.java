@@ -35,6 +35,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
     private ArrayList<Index> mIndexArrayListl;
     Screen1PresenterLogic mScreen1PresenterLogic;
 
+
     public Screen1Fragment() {
         // Required empty public constructor
     }
@@ -50,13 +51,6 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         mScreen1PresenterLogic.getListStoryIndex();
 
 
-//        //Fake Data
-//        mIndexArrayListl = new ArrayList<>();
-//        for (int i = 0; i <= 1000; i++) {
-//            mIndexArrayListl.add(new Index("Truỵện mới nhất", listtruen()));
-//        }
-//
-//
 
         return view;
     }
@@ -73,20 +67,15 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         transitScreen(new Screen3Fragment(getContext()));
     }
 
-    private ArrayList<Truyen> listtruen() {
-        ArrayList<Truyen> truyens = new ArrayList<>();
-        Truyen truyen = new Truyen();
-        truyen.setmTenTruyen("Hen Tai");
-        truyen.setmAvatar("AAA");
-        for (int i = 0; i <= 100; i++) {
-            truyens.add(truyen);
-        }
-        return truyens;
-    }
-
     @Override
     public void onClickItem(int position) {
         transitScreen(new Screen2Fragment());
+    }
+
+    @Override
+    public void onClickavata(Truyen truyen) {
+       transitScreen(new StoryChapterFragment());
+
     }
 
     private void transitScreen(Fragment fragment) {
@@ -100,6 +89,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void setAdapterType(List<Type> type) {
+
         mHorizontalAdapter = new HorizontalAdapter(type, Screen1Fragment.this);
         LinearLayoutManager horizontalLayoutManagaer = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.HORIZONTAL, false);
@@ -109,6 +99,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void setAdapterIndex(List<Index> index) {
+
         mIndexAdapter = new IndexAdapter(index, getContext(), this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
