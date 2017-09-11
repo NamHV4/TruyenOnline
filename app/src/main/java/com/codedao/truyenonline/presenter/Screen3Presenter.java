@@ -1,7 +1,6 @@
 package com.codedao.truyenonline.presenter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 
 import com.codedao.truyenonline.adapter.TruyenAdapter;
@@ -9,7 +8,7 @@ import com.codedao.truyenonline.model.Chuong;
 import com.codedao.truyenonline.model.TheLoai;
 import com.codedao.truyenonline.model.Truyen;
 import com.codedao.truyenonline.model.database.TruyenDatabaseHepler;
-import com.codedao.truyenonline.view.ReaderActivity;
+import com.codedao.truyenonline.view.fragment.IScreen3View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,20 +17,22 @@ import java.util.List;
  * Created by DUNG-PTIT on 19/08/2017.
  */
 
-public class Screen3Presenter implements TruyenAdapter.IOnItemTruyenListener {
+public class Screen3Presenter implements TruyenAdapter.IOnItemAdapterTruyenListener {
     private TruyenAdapter mTruyenAdapter;
     private List<TheLoai> mTheLoais;
     private List<Truyen> mTruyens;
     private List<Chuong> mChuongs;
     private Context mContext;
     private TruyenDatabaseHepler mTruyenDatabaseHepler;
+    private IScreen3View mIScreen3View;
 
     List<TheLoai> theLoais = new ArrayList<>();
     List<Chuong> chuongs = new ArrayList<>();
     List<Truyen> truyens = new ArrayList<>();
 
-    public Screen3Presenter(Context context) {
+    public Screen3Presenter(Context context, IScreen3View mIScreen3View) {
         this.mContext = context;
+        this.mIScreen3View = mIScreen3View;
         init();
     }
 
@@ -59,17 +60,21 @@ public class Screen3Presenter implements TruyenAdapter.IOnItemTruyenListener {
     }
 
     @Override
-    public void onItemClick() {
+    public void onItemAdapterClick(int position) {
         Toast.makeText(mContext, "Doc Truyen", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(mContext, ReaderActivity.class);
-        mContext.startActivity(intent);
+        mIScreen3View.onItemClick(position);
+//        Intent intent = new Intent(mContext, ReaderActivity.class);
+//        mContext.startActivity(intent);
     }
 
     @Override
-    public void onOfflineClick() {
+    public void onOfflineAdapterClick(int position) {
         Toast.makeText(mContext, "Da add offline", Toast.LENGTH_SHORT).show();
     }
 
+    public Truyen getItemById(int position){
+        return mTruyenAdapter.getItemById(position);
+    }
     //TODO Them  chuong
     public List<TheLoai> themTheLoai() {
         TheLoai theLoai = new TheLoai(1, "Truyện cười");
@@ -88,21 +93,185 @@ public class Screen3Presenter implements TruyenAdapter.IOnItemTruyenListener {
 
     public List<Truyen> themTruyen(int idTheLoai) {
         Truyen truyen;
-        for (int i = 1; i <= 10; i++) {
+        //for (int i = 1; i <= 10; i++) {
+            int i = 1;
             truyen = new Truyen();
             truyen.setmIdTruyen(""+i);
-            truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung");
+            truyen.setmTenTruyen("Truyen 1");
             truyen.setmTacGia("Jim Rohn");
             truyen.setmIdTheLoai(""+idTheLoai);
             truyen.setmNgay("20/08/2017");
-            truyen.setmNoiDung("Hôm nay thật là vui");
+            truyen.setmNoiDung("Truyen 1");
             truyen.setmSoChuong(""+1);
             truyen.setmSoLike(""+4500 + i+ idTheLoai);
             truyen.setmLuotXem(""+10000);
             truyen.setmAvatar(""+1);
             truyen.setmDanhGiau(""+1);
             truyens.add(truyen);
-        }
+            i++;
+            //--------------------
+
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("Truyen 2");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Truyen 2");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("Truyen 3");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Truyen 3");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 5");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 5");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 6");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 6");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 7");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 7");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+
+        //------------------
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 8");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 8");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 9");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 9");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 10");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 10");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 10");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 11");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+
+        truyen = new Truyen();
+        truyen.setmIdTruyen(""+i);
+        truyen.setmTenTruyen("7 Chiến lược thịnh vượng cua Dung 11");
+        truyen.setmTacGia("Jim Rohn");
+        truyen.setmIdTheLoai(""+idTheLoai);
+        truyen.setmNgay("20/08/2017");
+        truyen.setmNoiDung("Hôm nay thật là vui 12");
+        truyen.setmSoChuong(""+1);
+        truyen.setmSoLike(""+4500 + i+ idTheLoai);
+        truyen.setmLuotXem(""+10000);
+        truyen.setmAvatar(""+1);
+        truyen.setmDanhGiau(""+1);
+        truyens.add(truyen);
+        i++;
+        //--------------------
+        //}
 
         return truyens;
 

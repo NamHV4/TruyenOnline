@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.codedao.materialsearchview.MaterialSearchView;
 import com.codedao.materialsearchview.Story;
@@ -32,6 +33,9 @@ import java.util.List;
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     MaterialSearchView searchView;
+    //private FrameLayout mFrameLayoutSetting;
+    //private CustomSettingView mCustomSettingView;
+
 
 
     @Override
@@ -39,6 +43,7 @@ public class Screen1 extends BaseActivity
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         searchView = findViewById(R.id.search_view);
+
         setSupportActionBar(toolbar);
 
 
@@ -101,7 +106,20 @@ public class Screen1 extends BaseActivity
 
     @Override
     protected void registerEventView() {
-
+//        mFrameLayoutSetting = findViewById(R.id.frame_setting);
+//        mCustomSettingView = findViewById(R.id.float_setting);
+//
+//        mFrameLayoutSetting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(mCustomSettingView.isOutsite()){
+//                    mFrameLayoutSetting.setVisibility(View.GONE);
+//                }else {
+//                    mCustomSettingView.setOutsite(true);
+//                    mFrameLayoutSetting.setVisibility(View.GONE);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -148,24 +166,32 @@ public class Screen1 extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_read_offline) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            Toast.makeText(this, "Chờ phiên bản tiếp nhé !", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_like) {
+            Toast.makeText(this, "Đã bảo chờ phiên bản tiếp rồi !", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_night_mode) {
+            //mFrameLayoutSetting.setVisibility(View.VISIBLE);
+        } else if (id == R.id.nav_setting) {
+            Toast.makeText(this, "Mệt em vl, chờ phiên bản sau nhé !", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_version) {
+            Toast.makeText(this, "I am sorry ! Đừng gỡ app", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_policy) {
+            Toast.makeText(this, "Dừng lại tại đây thôi !", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_vote) {
+            //SystemClock.sleep(1000);
+            Toast.makeText(this, "Em nhây vl !", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_feedback) {
+            Toast.makeText(this, "Em gỡ mịa app đi !", Toast.LENGTH_SHORT).show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
 
 }

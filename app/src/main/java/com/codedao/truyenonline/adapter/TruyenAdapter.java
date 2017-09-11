@@ -22,13 +22,13 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
     private List<Truyen> mTruyens;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private IOnItemTruyenListener mIOnItemTruyenListener;
+    private IOnItemAdapterTruyenListener mIOnItemAdapterTruyenListener;
 
-    public TruyenAdapter(List<Truyen> mTruyens, Context mContext, IOnItemTruyenListener iOnItemTruyenListener) {
+    public TruyenAdapter(List<Truyen> mTruyens, Context mContext, IOnItemAdapterTruyenListener iOnItemAdapterTruyenListener) {
         this.mTruyens = mTruyens;
         this.mContext = mContext;
         this.mLayoutInflater = LayoutInflater.from(mContext);
-        mIOnItemTruyenListener = iOnItemTruyenListener;
+        mIOnItemAdapterTruyenListener = iOnItemAdapterTruyenListener;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
     }
 
     @Override
-    public void onBindViewHolder(TruyenViewHolder holder, int position) {
+    public void onBindViewHolder(TruyenViewHolder holder, final int position) {
         Truyen truyen = mTruyens.get(position);
 
         holder.tvIdTruyen.setText(String.valueOf(truyen.getmIdTruyen()));
@@ -49,13 +49,13 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIOnItemTruyenListener.onItemClick();
+                mIOnItemAdapterTruyenListener.onItemAdapterClick(position);
             }
         });
         holder.imgAddOffine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIOnItemTruyenListener.onOfflineClick();
+                mIOnItemAdapterTruyenListener.onOfflineAdapterClick(position);
             }
         });
 
@@ -89,9 +89,15 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
         }
     }
 
-    public interface IOnItemTruyenListener{
-
-        public void onItemClick();
-        public void onOfflineClick();
+    public Truyen getItemById(int position){
+        Truyen truyen = mTruyens.get(position);
+        return truyen;
     }
+    public interface IOnItemAdapterTruyenListener {
+
+        public void onItemAdapterClick(int position);
+        public void onOfflineAdapterClick(int position);
+    }
+
+
 }

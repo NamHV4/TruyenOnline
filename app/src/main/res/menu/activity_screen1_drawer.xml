@@ -5,19 +5,19 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_read_offline"
             android:icon="@drawable/ic_file_download_black_48dp"
             android:title="Đọc offline" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_like"
             android:icon="@drawable/icons_like"
             android:title="Đã thích" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_night_mode"
             android:icon="@drawable/night_mode"
             android:title="Chế độ ban đêm" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_manage"
             android:title="Setting" />
     </group>
@@ -25,11 +25,11 @@
     <item android:title="Sản phẩm">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_version"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Phiên bản hiện tại 1.0" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_policy"
                 android:icon="@drawable/ic_menu_send"
                 android:title="Điều khoản sử dụng" />
 
