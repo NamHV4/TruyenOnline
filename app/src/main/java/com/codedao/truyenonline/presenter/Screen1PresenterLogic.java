@@ -45,9 +45,9 @@ public class Screen1PresenterLogic implements IScreen1PresenterImp {
 
     @Override
     public void getListStoryIndex() {
-        mApiConnect.getTopNewStory();
-        mApiConnect.getTopLikeStory();
-        mApiConnect.getTopViewStory();
+        mApiConnect.getTopNewStory(10);
+        mApiConnect.getTopLikeStory(10);
+        mApiConnect.getTopViewStory(10);
     }
 
     @Subscribe(threadMode = ThreadMode.POSTING)
