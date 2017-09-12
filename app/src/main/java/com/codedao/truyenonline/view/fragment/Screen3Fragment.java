@@ -69,12 +69,6 @@ public class Screen3Fragment extends Fragment implements IScreen3View ,TruyenAda
         int sochương = Integer.parseInt(truyen.getmSoChuong());
         if(sochương>0){
             transitScreen(new StoryChapterFragment(truyen));
-            if (StoryChapterFragment.adapter != null) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .remove(StoryChapterFragment.adapter.getItem(0))
-                        .remove(StoryChapterFragment.adapter.getItem(1))
-                        .commit();
-            }
         }else {
             transitScreen(new ReaderFragment(truyen));
         }

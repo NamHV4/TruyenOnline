@@ -63,11 +63,11 @@ public class ReaderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reader, container, false);
         mFrameLayout = view.findViewById(R.id.rl_doc_truyen);
         mTxtNoiDungTruyen = view.findViewById(R.id.txt_noi_dung);
-        mTxtNoiDungTruyen.setText(Html.fromHtml(mTruyen.getmNoiDung()));
+
         mTacgia = view.findViewById(R.id.txt_tacgia);
         mTitle = view.findViewById(R.id.txt_title);
         mTacgia.setText(mTruyen.getmTacGia());
-        mTitle.setText(mTruyen.getmTenTruyen());
+
         mSeekBar = view.findViewById(R.id.seekbar_text);
         mImgSetting = view.findViewById(R.id.img_setting);
         mFrameLayoutSetting = view.findViewById(R.id.frame_setting);
@@ -76,6 +76,14 @@ public class ReaderFragment extends Fragment {
         mCurrentSize = 15 + (float)(50*10)/100;
         mTxtNoiDungTruyen.setTextSize(mCurrentSize);
         mToggleButton = view.findViewById(R.id.activate_toggle);
+
+        if(mChapter == null){
+            mTitle.setText(mTruyen.getmTenTruyen());
+            mTxtNoiDungTruyen.setText(Html.fromHtml(mTruyen.getmNoiDung()));
+        }else {
+            mTitle.setText(mChapter.getmTenC());
+            mTxtNoiDungTruyen.setText(Html.fromHtml(mChapter.getmNoidung()));
+        }
 
         mImgSetting.setOnClickListener(new View.OnClickListener() {
             @Override
