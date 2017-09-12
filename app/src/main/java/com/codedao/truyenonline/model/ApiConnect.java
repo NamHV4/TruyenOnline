@@ -22,6 +22,7 @@ public class ApiConnect {
     public static final String GET_SUCCSES_LIST_STORY = "GET_SUCCSES_LIST_STORY";
     public static final String GET_SUCCSES_LIST_STORY_TOPLIKE = "GET_SUCCSES_LIST_STORY_TOPLIKE";
     public static final String GET_SUCCSES_LIST_STORY_TOPVIEW = "GET_SUCCSES_LIST_STORY_TOPVIEW";
+    public static final String GET_SUCCSES_LIST_STORY_BYTYPE = "GET_SUCCSES_LIST_STORY_BYTYPE";
     ApiInterface mApi =
             ApiClient.getClient().create(ApiInterface.class);
 
@@ -39,7 +40,7 @@ public class ApiConnect {
                     messageEvent.setmTruyens(truyenList);
                     messageEvent.setmEvent("GET_SUCCSESS_LIST");
                     EventBus.getDefault().post(messageEvent);
-                }else {
+                } else {
                     getAllTitleStory();
                 }
             }
@@ -63,7 +64,7 @@ public class ApiConnect {
                     messageEvent.setmTypeList(typeList);
                     messageEvent.setmEvent(GET_SUCCSES_LIST_TYPE);
                     EventBus.getDefault().post(messageEvent);
-                }else {
+                } else {
                     getAllType();
                 }
 
@@ -90,7 +91,7 @@ public class ApiConnect {
                     messageEvent.setmEvent(GET_SUCCSES_LIST_STORY);
                     EventBus.getDefault().post(messageEvent);
 
-                }else {
+                } else {
                     getTopNewStory(limit);
                 }
             }
@@ -115,7 +116,7 @@ public class ApiConnect {
                     messageEvent.setmTruyens(storyList);
                     messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_TOPLIKE);
                     EventBus.getDefault().post(messageEvent);
-                }else {
+                } else {
                     getTopLikeStory(limit);
                 }
             }
@@ -140,8 +141,34 @@ public class ApiConnect {
                     messageEvent.setmTruyens(storyList);
                     messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_TOPVIEW);
                     EventBus.getDefault().post(messageEvent);
-                }else {
+                } else {
                     getTopViewStory(limit);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<StoryResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void getStoryByType(final String idtl) {
+
+        Call<StoryResponse> call = mApi.getTruyenTL(idtl);
+        call.enqueue(new Callback<StoryResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Truyen> storyList = response.body().getmTruyenList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTruyens(storyList);
+                    messageEvent.setmEvent(GET_SUCCSES_LIST_STORY_BYTYPE);
+                    EventBus.getDefault().post(messageEvent);
+                } else {
+                    getStoryByType(idtl);
                 }
 
             }
