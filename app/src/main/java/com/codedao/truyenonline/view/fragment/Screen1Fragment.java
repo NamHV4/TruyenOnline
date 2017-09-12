@@ -3,8 +3,6 @@ package com.codedao.truyenonline.view.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +13,7 @@ import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.adapter.HorizontalAdapter;
 import com.codedao.truyenonline.adapter.IndexAdapter;
 import com.codedao.truyenonline.adapter.ViewpagerAdapter;
+import com.codedao.truyenonline.base.BaseFragment;
 import com.codedao.truyenonline.model.Index;
 import com.codedao.truyenonline.model.Truyen;
 import com.codedao.truyenonline.model.Type;
@@ -26,7 +25,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnItemClickListener
+public class Screen1Fragment extends BaseFragment implements HorizontalAdapter.IOnItemClickListener
         , IndexAdapter.IOnItemClickListener, IScreen1View {
 
     private RecyclerView mRecyclerView;
@@ -64,20 +63,20 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void onClick(int position) {
-        transitScreen(new Screen3Fragment(getContext(), 1));
+        transitFragment(new Screen3Fragment(getContext(), 1));
     }
 
     @Override
     public void onClickItem(int position) {
-        transitScreen(new Screen2Fragment());
+        transitFragment(new Screen2Fragment());
     }
 
     @Override
     public void onClickavata(Truyen truyen) {
         if (Integer.parseInt(truyen.getmSoChuong()) == 0) {
-            transitScreen(new ReaderFragment(truyen));
+            transitFragment(new ReaderFragment(truyen));
         } else {
-            transitScreen(new StoryChapterFragment(truyen));
+            transitFragment(new StoryChapterFragment(truyen));
             if (StoryChapterFragment.adapter != null) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .remove(StoryChapterFragment.adapter.getItem(0))
@@ -85,14 +84,6 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
                         .commit();
             }
         }
-    }
-
-    private void transitScreen(Fragment fragment) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content, fragment);
-        fragmentTransaction.addToBackStack("SSSS");
-        fragmentTransaction.commit();
     }
 
 

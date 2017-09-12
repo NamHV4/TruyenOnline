@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.codedao.truyenonline.R;
@@ -18,20 +19,24 @@ import java.util.List;
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHolder> {
 
     private List<Chapter> mChapterList;
+    private IOnClickItemChapter mIOnClickItemChapter;
 
 
-    public ChapterAdapter(List<Chapter> mIndexList) {
+    public ChapterAdapter(List<Chapter> mIndexList, IOnClickItemChapter iOnClickItemChapter) {
         this.mChapterList = mIndexList;
+        this.mIOnClickItemChapter = iOnClickItemChapter;
 
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView txtTitle;
+        TextView txtTitle;
+        LinearLayout linearLayout;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             txtTitle = itemView.findViewById(R.id.txtTitleChapter);
+            linearLayout = itemView.findViewById(R.id.layout);
 
         }
     }
@@ -45,8 +50,14 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(ChapterAdapter.MyViewHolder holder, final int position) {
-        Chapter index = mChapterList.get(position);
-        holder.txtTitle.setText(index.getmTenC());
+        final Chapter chapter = mChapterList.get(position);
+        holder.txtTitle.setText(chapter.getmTenC());
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mIOnClickItemChapter.onItemClickChapter(chapter);
+            }
+        });
 
 
     }
@@ -56,3 +67,4 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyViewHo
         return mChapterList != null ? mChapterList.size() : 0;
     }
 }
+

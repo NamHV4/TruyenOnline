@@ -1,28 +1,24 @@
 package com.codedao.truyenonline.base;
 
-import android.content.Context;
-import android.util.AttributeSet;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
-import com.codedao.materialsearchview.MaterialSearchView;
+import com.codedao.truyenonline.R;
 
 
 /**
  * Created by utnam on 8/8/2017.
  */
 
-public class BaseFragment extends MaterialSearchView {
+public class BaseFragment extends Fragment {
 
-    public BaseFragment(Context context) {
-        super(context);
+    public void transitFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
-
-    public BaseFragment(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public BaseFragment(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
 
 }
