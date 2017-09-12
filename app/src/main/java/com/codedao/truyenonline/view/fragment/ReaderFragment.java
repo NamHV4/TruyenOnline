@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.codedao.truyenonline.R;
+import com.codedao.truyenonline.model.Chapter;
 import com.codedao.truyenonline.model.Truyen;
 import com.codedao.truyenonline.view.CustomSettingView;
 
@@ -35,15 +37,24 @@ public class ReaderFragment extends Fragment {
     private float mCurrentSize;
     private ToggleButton mToggleButton;
     private Truyen mTruyen;
+    private Chapter mChapter;
 
     public ReaderFragment() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public ReaderFragment(Truyen mTruyen) {
-        this.mTruyen = mTruyen;
+    public ReaderFragment(Truyen truyen) {
+        this.mTruyen = truyen;
     }
+
+    @SuppressLint("ValidFragment")
+    public ReaderFragment(Truyen mTruyen, Chapter chapter) {
+        this.mTruyen = mTruyen;
+        this.mChapter = chapter;
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +63,7 @@ public class ReaderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reader, container, false);
         mFrameLayout = view.findViewById(R.id.rl_doc_truyen);
         mTxtNoiDungTruyen = view.findViewById(R.id.txt_noi_dung);
-        mTxtNoiDungTruyen.setText(mTruyen.getmNoiDung());
+        mTxtNoiDungTruyen.setText(Html.fromHtml(mTruyen.getmNoiDung()));
         mTacgia = view.findViewById(R.id.txt_tacgia);
         mTitle = view.findViewById(R.id.txt_title);
         mTacgia.setText(mTruyen.getmTacGia());
@@ -123,6 +134,4 @@ public class ReaderFragment extends Fragment {
         });
         return view;
     }
-    
-
 }

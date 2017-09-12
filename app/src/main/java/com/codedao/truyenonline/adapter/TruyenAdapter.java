@@ -100,4 +100,7 @@ public class TruyenAdapter extends RecyclerView.Adapter<TruyenAdapter.TruyenView
     }
 
 
+
+
+
 }

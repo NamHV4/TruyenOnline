@@ -64,8 +64,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void onClick(int position) {
-
-        transitScreen(new Screen3Fragment(getContext()));
+        transitScreen(new Screen3Fragment(getContext(), 1));
     }
 
     @Override

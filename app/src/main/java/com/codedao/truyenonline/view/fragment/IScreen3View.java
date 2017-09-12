@@ -6,7 +6,6 @@ package com.codedao.truyenonline.view.fragment;
 
 public interface IScreen3View {
 
-    public void onItemClick(int position);
 
-    public void onOfflineClick(int position);
+    public void onDataStateChange();
 }

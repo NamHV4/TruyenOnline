@@ -117,7 +117,7 @@ public class TruyenDatabaseHepler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addChuong(Chuong chuong){
+    public void addChuong(Chuong chuong) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ID_CHUONG, chuong.getmIdChuong());
@@ -127,18 +127,18 @@ public class TruyenDatabaseHepler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deteleTruyen(Truyen truyen){
+    public void deteleTruyen(Truyen truyen) {
 
     }
 
-    public List<Truyen> getAllTruyen(){
+    public List<Truyen> getAllTruyen() {
         List<Truyen> truyens = new ArrayList<>();
 
-        String selectQuery = "SELECT * FROM "+ TABLE_TRUYEN;
+        String selectQuery = "SELECT * FROM " + TABLE_TRUYEN;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             Truyen truyen;
             do {
                 truyen = new Truyen();
@@ -154,7 +154,35 @@ public class TruyenDatabaseHepler extends SQLiteOpenHelper {
                 truyen.setmAvatar(cursor.getString(9));
                 truyen.setmDanhGiau(cursor.getString(10));
                 truyens.add(truyen);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
+        }
+        return truyens;
+    }
+
+    public List<Truyen> getListTruyenByIdType(int idTheLoai) {
+        List<Truyen> truyens = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_TRUYEN + " WHERE ID_THE_LOAI = " + idTheLoai + "";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            Truyen truyen;
+            do {
+                truyen = new Truyen();
+                truyen.setmIdTruyen(cursor.getString(0));
+                truyen.setmTenTruyen(cursor.getString(1));
+                truyen.setmTacGia(cursor.getString(2));
+                truyen.setmIdTheLoai(cursor.getString(3));
+                truyen.setmNgay(cursor.getString(4));
+                truyen.setmNoiDung(cursor.getString(5));
+                truyen.setmSoChuong(cursor.getString(6));
+                truyen.setmSoLike(cursor.getString(7));
+                truyen.setmLuotXem(cursor.getString(8));
+                truyen.setmAvatar(cursor.getString(9));
+                truyen.setmDanhGiau(cursor.getString(10));
+                truyens.add(truyen);
+            } while (cursor.moveToNext());
         }
         return truyens;
     }
