@@ -22,6 +22,7 @@ import com.codedao.truyenonline.model.ApiConnect;
 import com.codedao.truyenonline.model.MessageEvent;
 import com.codedao.truyenonline.model.Truyen;
 import com.codedao.truyenonline.view.fragment.Screen1Fragment;
+import com.codedao.truyenonline.view.fragment.StoryChapterFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -131,6 +132,12 @@ public class Screen1 extends BaseActivity
         } else if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
+            if (StoryChapterFragment.adapter != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .remove(StoryChapterFragment.adapter.getItem(0))
+                        .remove(StoryChapterFragment.adapter.getItem(1))
+                        .commit();
+            }
             int fragments = getSupportFragmentManager().getBackStackEntryCount();
             if (fragments == 1) {
                 finish();

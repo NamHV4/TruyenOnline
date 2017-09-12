@@ -77,12 +77,6 @@ public class Screen1Fragment extends BaseFragment implements HorizontalAdapter.I
             transitFragment(new ReaderFragment(truyen));
         } else {
             transitFragment(new StoryChapterFragment(truyen));
-            if (StoryChapterFragment.adapter != null) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .remove(StoryChapterFragment.adapter.getItem(0))
-                        .remove(StoryChapterFragment.adapter.getItem(1))
-                        .commit();
-            }
         }
     }
 

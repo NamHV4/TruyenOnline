@@ -42,6 +42,7 @@ public class StoryChapterFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_chuong, container, false);
         mViewPager = mView.findViewById(R.id.view_pager);
         mTabLayout = mView.findViewById(R.id.tab_layout);
+        addTab();
         return mView;
     }
 
@@ -53,7 +54,7 @@ public class StoryChapterFragment extends Fragment {
 
     @Override
     public void onResume() {
-        addTab();
+
         super.onResume();
     }
 
