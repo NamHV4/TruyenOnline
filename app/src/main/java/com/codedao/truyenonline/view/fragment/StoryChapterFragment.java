@@ -1,6 +1,7 @@
 package com.codedao.truyenonline.view.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.adapter.ViewpagerAdapter;
+import com.codedao.truyenonline.model.Truyen;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,10 +23,18 @@ public class StoryChapterFragment extends Fragment {
     private TabLayout mTabLayout;
     private View mView;
     public static ViewpagerAdapter adapter;
+    public Truyen mTruyen;
 
     public StoryChapterFragment() {
         // Required empty public constructor
     }
+
+
+    @SuppressLint("ValidFragment")
+    public StoryChapterFragment(Truyen truyen) {
+        this.mTruyen = truyen;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,8 +60,8 @@ public class StoryChapterFragment extends Fragment {
     private void addTab() {
         FragmentManager manager = getFragmentManager();
         adapter = new ViewpagerAdapter(manager);
-        adapter.addFragment(new IntroduceFragment(), "Giới Thiệu");
-        adapter.addFragment(new ChapterFragment(), "Chương");
+        adapter.addFragment(new IntroduceFragment(mTruyen), "Giới Thiệu");
+        adapter.addFragment(new ChapterFragment(mTruyen), "Chương");
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
 

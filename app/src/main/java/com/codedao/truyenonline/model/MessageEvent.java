@@ -10,6 +10,15 @@ public class MessageEvent {
     private String mEvent;
     private List<Truyen> mTruyens;
     private List<Type> mTypeList;
+    private List<Chapter> mChapters;
+
+    public List<Chapter> getmChapters() {
+        return mChapters;
+    }
+
+    public void setmChapters(List<Chapter> mChapters) {
+        this.mChapters = mChapters;
+    }
 
     public List<Type> getmTypeList() {
         return mTypeList;

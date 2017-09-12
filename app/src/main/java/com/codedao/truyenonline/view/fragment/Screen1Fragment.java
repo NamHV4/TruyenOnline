@@ -75,16 +75,17 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void onClickavata(Truyen truyen) {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.content, new StoryChapterFragment(), getString(R.string.title_activity_screen1))
-                .addToBackStack(getString(R.string.title_activity_screen1))
-                .commit();
-        if (StoryChapterFragment.adapter != null) {
-            getActivity().getSupportFragmentManager().beginTransaction().remove(StoryChapterFragment.adapter.getItem(0))
-                    .remove(StoryChapterFragment.adapter.getItem(1)).commit();
+        if (Integer.parseInt(truyen.getmSoChuong()) == 0) {
+            transitScreen(new ReaderFragment(truyen));
+        } else {
+            transitScreen(new StoryChapterFragment(truyen));
+            if (StoryChapterFragment.adapter != null) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .remove(StoryChapterFragment.adapter.getItem(0))
+                        .remove(StoryChapterFragment.adapter.getItem(1))
+                        .commit();
+            }
         }
-
-
     }
 
     private void transitScreen(Fragment fragment) {

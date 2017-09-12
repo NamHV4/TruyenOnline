@@ -1,5 +1,6 @@
 package com.codedao.truyenonline.rest;
 
+import com.codedao.truyenonline.model.ChapterResponse;
 import com.codedao.truyenonline.model.StoryResponse;
 import com.codedao.truyenonline.model.TypeResponse;
 
@@ -29,4 +30,7 @@ public interface ApiInterface {
 
     @GET("get_truyen_topview.php")
     Call<StoryResponse> getTopView(@Query("limit") int limit);
+
+    @GET("get_chuong.php")
+    Call<ChapterResponse> getChapterByIdStory(@Query("IdTruyen") String id);
 }
