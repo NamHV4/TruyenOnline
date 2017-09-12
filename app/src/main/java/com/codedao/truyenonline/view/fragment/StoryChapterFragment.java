@@ -20,11 +20,11 @@ public class StoryChapterFragment extends Fragment {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private View mView;
+    public static ViewpagerAdapter adapter;
 
     public StoryChapterFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,13 +49,16 @@ public class StoryChapterFragment extends Fragment {
 
     private void addTab() {
         FragmentManager manager = getFragmentManager();
-        ViewpagerAdapter adapter = new ViewpagerAdapter(manager);
+        adapter = new ViewpagerAdapter(manager);
         adapter.addFragment(new IntroduceFragment(), "Giới Thiệu");
         adapter.addFragment(new ChapterFragment(), "Chương");
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-        mTabLayout.setTabsFromPagerAdapter(adapter);
+
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
 }

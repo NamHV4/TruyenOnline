@@ -59,6 +59,7 @@ public class Screen1 extends BaseActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content, new Screen1Fragment());
+        fragmentTransaction.addToBackStack("Screen1Fragment");
         fragmentTransaction.commit();
     }
 
@@ -130,7 +131,16 @@ public class Screen1 extends BaseActivity
         } else if (searchView.isSearchOpen()) {
             searchView.closeSearch();
         } else {
-            super.onBackPressed();
+            int fragments = getSupportFragmentManager().getBackStackEntryCount();
+            if (fragments == 1) {
+                finish();
+            } else {
+                if (getFragmentManager().getBackStackEntryCount() > 1) {
+                    getFragmentManager().popBackStack();
+                } else {
+                    super.onBackPressed();
+                }
+            }
         }
 
     }
@@ -190,6 +200,7 @@ public class Screen1 extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.codedao.truyenonline.R;
 import com.codedao.truyenonline.adapter.HorizontalAdapter;
 import com.codedao.truyenonline.adapter.IndexAdapter;
+import com.codedao.truyenonline.adapter.ViewpagerAdapter;
 import com.codedao.truyenonline.model.Index;
 import com.codedao.truyenonline.model.Truyen;
 import com.codedao.truyenonline.model.Type;
@@ -33,7 +34,8 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
     private RecyclerView mRecyclerViewIndex;
     private IndexAdapter mIndexAdapter;
     private ArrayList<Index> mIndexArrayListl;
-    Screen1PresenterLogic mScreen1PresenterLogic;
+    private Screen1PresenterLogic mScreen1PresenterLogic;
+    private ViewpagerAdapter mViewpagerAdapter;
 
 
     public Screen1Fragment() {
@@ -51,10 +53,8 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         mScreen1PresenterLogic.getListStoryIndex();
 
 
-
         return view;
     }
-
 
 
     private void initView(View view) {
@@ -64,6 +64,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void onClick(int position) {
+
         transitScreen(new Screen3Fragment(getContext()));
     }
 
@@ -74,7 +75,15 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
 
     @Override
     public void onClickavata(Truyen truyen) {
-       transitScreen(new StoryChapterFragment());
+        getFragmentManager().beginTransaction()
+                .replace(R.id.content, new StoryChapterFragment(), getString(R.string.title_activity_screen1))
+                .addToBackStack(getString(R.string.title_activity_screen1))
+                .commit();
+        if (StoryChapterFragment.adapter != null) {
+            getActivity().getSupportFragmentManager().beginTransaction().remove(StoryChapterFragment.adapter.getItem(0))
+                    .remove(StoryChapterFragment.adapter.getItem(1)).commit();
+        }
+
 
     }
 
@@ -82,7 +91,7 @@ public class Screen1Fragment extends Fragment implements HorizontalAdapter.IOnIt
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content, fragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack("SSSS");
         fragmentTransaction.commit();
     }
 
