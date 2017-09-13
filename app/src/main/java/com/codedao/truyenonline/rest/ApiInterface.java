@@ -33,4 +33,7 @@ public interface ApiInterface {
 
     @GET("get_chuong.php")
     Call<ChapterResponse> getChapterByIdStory(@Query("IdTruyen") String id);
+
+    @GET("get_truyen_id.php")
+    Call<StoryResponse> getStoryByID(@Query("IDT")String id);
 }

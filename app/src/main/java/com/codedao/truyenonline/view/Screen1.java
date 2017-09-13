@@ -2,12 +2,12 @@ package com.codedao.truyenonline.view;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +21,7 @@ import com.codedao.truyenonline.base.BaseActivity;
 import com.codedao.truyenonline.model.ApiConnect;
 import com.codedao.truyenonline.model.MessageEvent;
 import com.codedao.truyenonline.model.Truyen;
+import com.codedao.truyenonline.view.fragment.ReaderFragment;
 import com.codedao.truyenonline.view.fragment.Screen1Fragment;
 import com.codedao.truyenonline.view.fragment.StoryChapterFragment;
 
@@ -31,12 +32,14 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codedao.truyenonline.model.ApiConnect.GET_SUCCSES_STORY_BY_ID;
+
 public class Screen1 extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     MaterialSearchView searchView;
+    private ApiConnect mApiConnect;
     //private FrameLayout mFrameLayoutSetting;
     //private CustomSettingView mCustomSettingView;
-
 
 
     @Override
@@ -44,22 +47,22 @@ public class Screen1 extends BaseActivity
         super.onCreate(savedInstanceState);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         searchView = findViewById(R.id.search_view);
-
+        mApiConnect = new ApiConnect();
         setSupportActionBar(toolbar);
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        attachScreen1Fragment();
+        attachScreen1Fragment(new Screen1Fragment());
         eventBusInit();
 
     }
 
-    private void attachScreen1Fragment() {
+    private void attachScreen1Fragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.content, new Screen1Fragment());
+        fragmentTransaction.replace(R.id.content, fragment);
         fragmentTransaction.addToBackStack("Screen1Fragment");
         fragmentTransaction.commit();
     }
@@ -73,30 +76,49 @@ public class Screen1 extends BaseActivity
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
-            final List<Truyen> truyenList = event.getmTruyens();
-            int size = event.getmTruyens().size();
-            List<Story> stories=new ArrayList<>();
-            for (int i=0;i<size;i++){
-                stories.add(new Story(truyenList.get(i).getmIdTruyen()
-                        ,truyenList.get(i).getmTenTruyen()));
-            }
-
-
-            final String[] suggestionListName = new String[event.getmTruyens().size()];
-            final String[] suggestionListID = new String[event.getmTruyens().size()];
-            for (int i = 0; i < suggestionListName.length; i++) {
-                suggestionListName[i] = event.getmTruyens().get(i).getmTenTruyen();
-                suggestionListID[i] = event.getmTruyens().get(i).getmIdTruyen();
-            }
-            searchView.setSuggestions(stories);
-            searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 Story a = (Story) adapterView.getItemAtPosition(i);
-                    Log.d("Nam","name="+a.getValue().toString()+" id="+a.getKey().toString());
+        switch (event.getmEvent()) {
+            case "GET_SUCCSESS_LIST":
+                final List<Truyen> truyenList = event.getmTruyens();
+                int size = event.getmTruyens().size();
+                List<Story> stories = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    stories.add(new Story(truyenList.get(i).getmIdTruyen()
+                            , truyenList.get(i).getmTenTruyen()));
                 }
-            });
+
+
+                final String[] suggestionListName = new String[event.getmTruyens().size()];
+                final String[] suggestionListID = new String[event.getmTruyens().size()];
+                for (int i = 0; i < suggestionListName.length; i++) {
+                    suggestionListName[i] = event.getmTruyens().get(i).getmTenTruyen();
+                    suggestionListID[i] = event.getmTruyens().get(i).getmIdTruyen();
+                }
+                searchView.setSuggestions(stories);
+                searchView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Story a = (Story) adapterView.getItemAtPosition(i);
+                        mApiConnect.getStoryByID(a.getKey().toString());
+
+                    }
+                });
+                break;
+            case GET_SUCCSES_STORY_BY_ID:
+                Truyen truyen = event.getmTruyens().get(0);
+                int count = Integer.parseInt(truyen.getmSoChuong());
+                if (count > 0) {
+                    searchView.closeSearch();
+                    attachScreen1Fragment(new StoryChapterFragment(truyen));
+                } else {
+                    searchView.closeSearch();
+                    attachScreen1Fragment(new ReaderFragment(truyen));
+                }
+                break;
+            default:
+                break;
+        }
+        if (event.getmEvent().equals("GET_SUCCSESS_LIST")) {
+
         }
     }
 
@@ -108,20 +130,6 @@ public class Screen1 extends BaseActivity
 
     @Override
     protected void registerEventView() {
-//        mFrameLayoutSetting = findViewById(R.id.frame_setting);
-//        mCustomSettingView = findViewById(R.id.float_setting);
-//
-//        mFrameLayoutSetting.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(mCustomSettingView.isOutsite()){
-//                    mFrameLayoutSetting.setVisibility(View.GONE);
-//                }else {
-//                    mCustomSettingView.setOutsite(true);
-//                    mFrameLayoutSetting.setVisibility(View.GONE);
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -207,9 +215,6 @@ public class Screen1 extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
 
 
 }

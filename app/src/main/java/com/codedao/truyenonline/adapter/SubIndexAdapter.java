@@ -15,16 +15,16 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 /**
- * Created by MinhQuang on 8/16/2017.
+ * Created by Utnam on 8/16/2017.
  */
 
-public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.SuggestionViewholder> {
+public class SubIndexAdapter extends RecyclerView.Adapter<SubIndexAdapter.SuggestionViewholder> {
     ArrayList<Truyen> suggestionList;
     Context context;
     LayoutInflater layoutInflater;
-    IClickAvatar mIClickAvata;
+    IClickAvata mIClickAvata;
 
-    public SuggestionAdapter(ArrayList<Truyen> suggestionList, Context context, IClickAvatar iClickAvata) {
+    public SubIndexAdapter(ArrayList<Truyen> suggestionList, Context context, IClickAvata iClickAvata) {
         this.suggestionList = suggestionList;
         this.context = context;
         this.layoutInflater = LayoutInflater.from(context);
@@ -32,13 +32,13 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Su
     }
 
     @Override
-    public SuggestionAdapter.SuggestionViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.layout_item_screen2, parent, false);
+    public SubIndexAdapter.SuggestionViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = layoutInflater.inflate(R.layout.layout_item_subindex, parent, false);
         return new SuggestionViewholder(view);
     }
 
     @Override
-    public void onBindViewHolder(SuggestionAdapter.SuggestionViewholder holder, int position) {
+    public void onBindViewHolder(SubIndexAdapter.SuggestionViewholder holder, int position) {
         final Truyen truyen = suggestionList.get(position);
 
         holder.tvSoDiem.setText(truyen.getmSoLike());
@@ -73,7 +73,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Su
         }
     }
 
-    public interface IClickAvatar {
+    public interface IClickAvata {
         void onclickAvt(Truyen truyen);
     }
 

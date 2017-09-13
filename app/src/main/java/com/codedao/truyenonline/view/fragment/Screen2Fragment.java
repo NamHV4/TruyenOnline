@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Screen2Fragment extends Fragment implements SuggestionAdapter.IClickAvata {
+public class Screen2Fragment extends Fragment implements SuggestionAdapter.IClickAvatar {
     RecyclerView rcvScreen2;
     ArrayList<Truyen> listSuggestion;
     SuggestionAdapter suggestionAdapter;

@@ -19,11 +19,11 @@ import java.util.List;
  * Created by utnam on 8/17/2017.
  */
 
-public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder> implements SuggestionAdapter.IClickAvata {
+public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder> implements SubIndexAdapter.IClickAvata {
 
     private Context mContext;
     private List<Index> mIndexList;
-    private SuggestionAdapter mSuggestionAdapter;
+    private SubIndexAdapter mSuggestionAdapter;
     private IndexAdapter.IOnItemClickListener mIOnItemClickListener;
 
     public IndexAdapter(List<Index> mIndexList, Context context, IOnItemClickListener iOnItemClickListener) {
@@ -61,7 +61,7 @@ public class IndexAdapter extends RecyclerView.Adapter<IndexAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         Index index = mIndexList.get(position);
-        mSuggestionAdapter = new SuggestionAdapter((ArrayList<Truyen>) index.getmTruyens(), this.mContext, this);
+        mSuggestionAdapter = new SubIndexAdapter((ArrayList<Truyen>) index.getmTruyens(), this.mContext, this);
         holder.txtTitle.setText(index.getmTitle());
         LinearLayoutManager linearLayoutManager
                 = new LinearLayoutManager(this.mContext,

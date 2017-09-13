@@ -24,6 +24,7 @@ public class ApiConnect {
     public static final String GET_SUCCSES_LIST_STORY_TOPVIEW = "GET_SUCCSES_LIST_STORY_TOPVIEW";
     public static final String GET_SUCCSES_LIST_STORY_BYTYPE = "GET_SUCCSES_LIST_STORY_BYTYPE";
     public static final String GET_SUCCSES_LIST_CHAPTER = "GET_SUCCSES_LIST_CHAPTER";
+    public static final String GET_SUCCSES_STORY_BY_ID = "GET_SUCCSES_STORY_BY_ID";
     ApiInterface mApi =
             ApiClient.getClient().create(ApiInterface.class);
 
@@ -202,6 +203,32 @@ public class ApiConnect {
 
             @Override
             public void onFailure(Call<ChapterResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void getStoryByID(final String id) {
+
+        Call<StoryResponse> call = mApi.getStoryByID(id);
+        call.enqueue(new Callback<StoryResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<StoryResponse> call, @NonNull Response<StoryResponse> response) {
+                if (response.isSuccessful()) {
+                    List<Truyen> storyList = response.body().getmTruyenList();
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setmTruyens(storyList);
+                    messageEvent.setmEvent(GET_SUCCSES_STORY_BY_ID);
+                    EventBus.getDefault().post(messageEvent);
+                } else {
+                    getStoryByID(id);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<StoryResponse> call, Throwable t) {
 
             }
         });
